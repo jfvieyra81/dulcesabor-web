@@ -17,11 +17,15 @@ const TIER_LABELS = ["1-4 cajas","5-9 cajas","10-19 cajas","20+ cajas"];
 const getTier = (q) => q >= 20 ? 3 : q >= 10 ? 2 : q >= 5 ? 1 : 0;
 
 const P = [
-  { name: "Cachetadas / Slaps", sub: "Paletas de caramelo macizo con chile — 7 sabores", pres: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tag:"MÁS VENDIDO", tagColor:"#D4951A", sabores:["Tamarindo","Manzana Verde","Mix","DobleX"] },
-  { name: "Mega Huevón Display", sub: "Dulce de pulpa confitada picosita — Tamarindo", pres: "16 displays/caja", up:["$5.25","$5.00","$4.85","$4.65"], cp:[84, 80, 77.60, 74.40], img: IMG_MEGA_HUEVON_DISPLAY, tag:"NUEVO", tagColor:"#C41E2A" },
-  { name: "Mega Huevón Bolsa", sub: "Pulpa confitada — ideal para granel y piñateros", pres: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tag:"GRANEL", tagColor:"#7B1FA2" },
-  { name: "Flamkiyos", sub: "Pulpa tipo tamarindo cubierto de chile — sabor intenso", pres: "12 bolsas/caja", up:["$7.75","$7.35","$7.15","$6.80"], cp:[93, 88.20, 85.80, 81.60], img: IMG_FLAMKIYOS, tag:"INTENSO", tagColor:"#E65100" },
-  { name: "Mordidilla", sub: "Paleta suave enchilada — clásico de Pigüi", pres: "12 bolsas/caja", up:["$5.00","$4.75","$4.60","$4.40"], cp:[60, 57, 55.20, 52.80], img: IMG_MORDIDILLA, tag:"CLÁSICO", tagColor:"#2E7D32" },
+  { name: "Cachetadas / Slaps", sub: "Paletas de caramelo macizo con chile — 7 sabores", pres: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tag:"MÁS VENDIDO", tagColor:"#D4951A", sabores:["Tamarindo","Mix","Mango","Watermelon","Manzana Verde","DobleX","Pickle"] },
+];
+
+// Productos próximamente — ya tenemos fotos pero aún no en inventario
+const P_PROX = [
+  { name: "Mega Huevón Display", sub: "Dulce de pulpa confitada picosita — Tamarindo", pres: "16 displays/caja", img: IMG_MEGA_HUEVON_DISPLAY, tagColor:"#C41E2A" },
+  { name: "Mega Huevón Bolsa", sub: "Pulpa confitada — ideal para granel y piñateros", pres: "10 bolsas/caja", img: IMG_MEGA_HUEVON_BOLSA, tagColor:"#7B1FA2" },
+  { name: "Flamkiyos", sub: "Pulpa tipo tamarindo cubierto de chile — sabor intenso", pres: "12 bolsas/caja", img: IMG_FLAMKIYOS, tagColor:"#E65100" },
+  { name: "Mordidilla", sub: "Paleta suave enchilada — clásico de Pigüi", pres: "12 bolsas/caja", img: IMG_MORDIDILLA, tagColor:"#2E7D32" },
 ];
 
 const PROX = ["Piguileta Fuego", "Piguileta Cool", "Cache Colors", "Devoralien", "Devora", "Changaleta", "Chilipekas", "Bolas Don Cuco", "Arenitas"];
@@ -57,11 +61,11 @@ export default function App() {
   const normalizePhone = (p) => (p || "").replace(/\D/g, "");
 
   // Map cart keys (web) to CRM product IDs (for automatic order import to CRM)
+  // Only Slaps are currently available for sale — index 0 in P array
   const CART_TO_CRM = {
     "0_Mix": "slaps-mix", "0_Tamarindo": "slaps-tam", "0_Mango": "slaps-mgo",
     "0_Watermelon": "slaps-wtm", "0_Manzana Verde": "slaps-app", "0_Green Apple": "slaps-app",
     "0_DobleX": "slaps-dbx", "0_Pickle": "slaps-pkl",
-    "1": "mega-hue-d", "2": "mega-hue-b", "3": "flamkiyos", "4": "mordidilla"
   };
 
   const cartToCrmItems = (cartObj) => {
@@ -374,8 +378,28 @@ export default function App() {
             </div>
           )}
 
-          <div style={{ marginTop: 20, padding: 16, background: "#FFF8E1", borderRadius: 8, fontSize: 13 }}>
-            <strong style={{ color: "#D4951A" }}>Próximamente:</strong> {PROX.join(" • ")}
+          {/* PRÓXIMAMENTE — Visual cards */}
+          <div style={{ marginTop: 32, padding: 20, background: "linear-gradient(135deg, #FFF8E1 0%, #FFF3F3 100%)", borderRadius: 12, border: "2px dashed #D4951A" }}>
+            <div style={{ textAlign: "center", marginBottom: 16 }}>
+              <div style={{ display: "inline-block", padding: "4px 12px", background: "#D4951A", color: "#fff", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: 1, marginBottom: 8 }}>PRÓXIMAMENTE</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, margin: "4px 0 4px", color: "#1A1A1A" }}>Catálogo en Expansión</h3>
+              <p style={{ fontSize: 13, color: "#666", margin: 0 }}>Estos productos llegan pronto — pregúntenos por la fecha</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 10 }}>
+              {P_PROX.map((p, i) => (
+                <div key={i} style={{ background: "#fff", borderRadius: 8, padding: 10, border: "1px solid #eee", textAlign: "center", position: "relative" }}>
+                  <div style={{ position: "relative", marginBottom: 8 }}>
+                    <img src={p.img} alt={p.name} style={{ width: "100%", height: 90, objectFit: "contain", opacity: 0.65, filter: "grayscale(0.3)" }} />
+                    <div style={{ position: "absolute", top: 4, right: 4, background: "rgba(212,149,26,0.95)", color: "#fff", fontSize: 9, fontWeight: 700, padding: "2px 6px", borderRadius: 3, letterSpacing: 0.5 }}>PRONTO</div>
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#1A1A1A", marginBottom: 2 }}>{p.name}</div>
+                  <div style={{ fontSize: 10, color: "#888", lineHeight: 1.3 }}>{p.sub}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 14, paddingTop: 12, borderTop: "1px solid rgba(212,149,26,0.3)", fontSize: 12, color: "#666", textAlign: "center" }}>
+              <strong style={{ color: "#D4951A" }}>Más productos Pigüi en camino:</strong> {PROX.join(" • ")}
+            </div>
           </div>
         </div>
       </div>
