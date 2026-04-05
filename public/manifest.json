@@ -1,0 +1,16 @@
+{
+  "name": "Dulce Sabor LLC",
+  "short_name": "Dulce Sabor",
+  "description": "Distribuidor de Dulces Mexicanos Auténticos — NorCal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#C41E2A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
