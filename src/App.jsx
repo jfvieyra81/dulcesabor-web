@@ -33,7 +33,144 @@ const FAQ = [
   { q: "¿Son los dulces originales de México?", a: "Si. De fábrica Pigüi en Guadalajara, Jalisco. El mismo fabricante desde 1987." },
 ];
 
+// === STORE LOCATOR (página /donde-comprar) ===
+// Lee tiendas activas de Supabase public_stores y las agrupa por zona.
+const ZONE_ORDER = ["Santa Rosa / Sonoma", "Sacramento", "San Jose / Bay Area", "Mendocino / Ukiah", "Oakland / Bay Area", "Other"];
+const PUBLIC_INACTIVE_DAYS = 90;
+
+function StoreLocator({ navigate }) {
+  const [stores, setStores] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.title = "¿Dónde Comprar? — Dulce Sabor LLC";
+    if (!cloudEnabled) { setError("Catálogo no disponible en este momento."); return; }
+    fetch(`${SUPA_URL}/rest/v1/public_stores?select=*&order=display_name.asc`, { headers: SUPA_HEADERS })
+      .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
+      .then(data => {
+        // Filtrar tiendas con compra reciente (≤90 días) o sin fecha (recién agregadas)
+        const cutoff = Date.now() - PUBLIC_INACTIVE_DAYS * 86400000;
+        const active = (data || []).filter(s => !s.last_purchase_date || new Date(s.last_purchase_date).getTime() >= cutoff);
+        setStores(active);
+      })
+      .catch(e => { console.error(e); setError("No pudimos cargar el directorio. Intenta más tarde."); });
+  }, []);
+
+  // Agrupar por zona
+  const byZone = {};
+  (stores || []).forEach(s => {
+    const z = s.zone || "Other";
+    if (!byZone[z]) byZone[z] = [];
+    byZone[z].push(s);
+  });
+  const zonesPresent = ZONE_ORDER.filter(z => byZone[z]).concat(Object.keys(byZone).filter(z => !ZONE_ORDER.includes(z)));
+
+  const mapsLink = (s) => {
+    const q = encodeURIComponent(`${s.display_name} ${s.address || ""} ${s.city || ""}`.trim());
+    return `https://www.google.com/maps/search/?api=1&query=${q}`;
+  };
+  const waLink = (phone) => {
+    const digits = (phone || "").replace(/\D/g, "");
+    return digits ? `https://wa.me/1${digits.replace(/^1/, "")}` : null;
+  };
+
+  return (
+    <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#fff", color: "#1A1A1A", minHeight: "100vh" }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+      {/* Header */}
+      <div style={{ background: "#C41E2A", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>← DULCES PIGUI — Distribuidor NorCal</a>
+        <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
+      </div>
+
+      {/* Hero */}
+      <div style={{ background: "linear-gradient(135deg, #FFF8E1, #fff)", padding: "40px 20px", textAlign: "center" }}>
+        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+          <h1 style={{ fontSize: "clamp(28px, 6vw, 40px)", fontWeight: 700, margin: "0 0 12px", lineHeight: 1.2 }}>
+            ¿Dónde Comprar <span style={{ color: "#C41E2A" }}>Dulces Pigüi</span> en NorCal?
+          </h1>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.5, margin: 0 }}>
+            Estos son los negocios que venden Slaps, Mega Huevón y más dulces mexicanos en tu zona. Visítalos y apoya el comercio local. 🇲🇽
+          </p>
+        </div>
+      </div>
+
+      {/* Listings */}
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "30px 20px 80px" }}>
+        {error && <div style={{ padding: 24, background: "#FDE8E8", color: "#C41E2A", borderRadius: 8, textAlign: "center" }}>{error}</div>}
+        {!error && stores === null && <div style={{ padding: 40, textAlign: "center", color: "#888" }}>Cargando directorio...</div>}
+        {!error && stores && stores.length === 0 && (
+          <div style={{ padding: 40, textAlign: "center", color: "#888" }}>
+            <p style={{ marginBottom: 16 }}>Próximamente listaremos las tiendas que venden nuestros productos.</p>
+            <a href="https://wa.me/17073607420" style={{ color: "#C41E2A", fontWeight: 700 }}>Mientras tanto, escríbeme por WhatsApp</a>
+          </div>
+        )}
+        {!error && stores && stores.length > 0 && zonesPresent.map(zone => (
+          <div key={zone} style={{ marginBottom: 36 }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: "#C41E2A", borderBottom: "2px solid #C41E2A", paddingBottom: 6, marginBottom: 16 }}>📍 {zone}</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
+              {byZone[zone].map(store => (
+                <div key={store.id} style={{ background: "#fff", border: "1px solid #eee", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", display: "flex", flexDirection: "column" }}>
+                  {store.photo_url ? (
+                    <img src={store.photo_url} alt={store.display_name} style={{ width: "100%", height: 160, objectFit: "cover", display: "block" }} />
+                  ) : (
+                    <div style={{ width: "100%", height: 160, background: "linear-gradient(135deg, #FFF8E1, #FFE0B2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 48 }}>🏪</div>
+                  )}
+                  <div style={{ padding: 16, flex: 1, display: "flex", flexDirection: "column" }}>
+                    <h3 style={{ fontSize: 17, fontWeight: 700, margin: "0 0 6px" }}>{store.display_name}</h3>
+                    {store.address && <div style={{ fontSize: 13, color: "#666", marginBottom: 4 }}>📍 {store.address}</div>}
+                    {store.hours && <div style={{ fontSize: 13, color: "#666", marginBottom: 8 }}>🕐 {store.hours}</div>}
+                    {Array.isArray(store.recent_products) && store.recent_products.length > 0 && (
+                      <div style={{ marginBottom: 12 }}>
+                        <div style={{ fontSize: 11, color: "#888", textTransform: "uppercase", fontWeight: 600, marginBottom: 4 }}>Productos disponibles</div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                          {store.recent_products.slice(0, 6).map((p, idx) => (
+                            <span key={idx} style={{ fontSize: 11, background: "#FFF8E1", color: "#8B6914", padding: "3px 8px", borderRadius: 4, fontWeight: 600 }}>{p.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <div style={{ marginTop: "auto", display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <a href={mapsLink(store)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 110, textAlign: "center", padding: "8px 12px", background: "#1A73E8", color: "#fff", borderRadius: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}>🗺️ Cómo llegar</a>
+                      {waLink(store.whatsapp) && (
+                        <a href={waLink(store.whatsapp)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 110, textAlign: "center", padding: "8px 12px", background: "#25D366", color: "#fff", borderRadius: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}>💬 WhatsApp</a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* CTA back */}
+        <div style={{ textAlign: "center", marginTop: 40, padding: 24, background: "#F9F9F7", borderRadius: 12 }}>
+          <p style={{ fontSize: 14, color: "#666", margin: "0 0 12px" }}>¿Tienes una tienda y vendes Dulces Pigüi?</p>
+          <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20aparecer%20en%20donde-comprar" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: "12px 24px", background: "#C41E2A", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 700 }}>
+            Agrégame al directorio
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  const [path, setPath] = useState(typeof window !== "undefined" ? window.location.pathname : "/");
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+  const navigate = (newPath) => {
+    if (typeof window === "undefined") return;
+    window.history.pushState({}, "", newPath);
+    setPath(newPath);
+    window.scrollTo(0, 0);
+  };
+
   const [sY, setSY] = useState(0);
   const [cart, setCart] = useState({});
   const setQty = (key, q) => setCart(c => { const n = {...c}; if (q > 0) n[key] = q; else delete n[key]; return n; });
@@ -205,6 +342,10 @@ export default function App() {
 
   const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+  if (path === "/donde-comprar" || path === "/donde-comprar/") {
+    return <StoreLocator navigate={navigate} />;
+  }
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#fff", color: "#1A1A1A", position: "relative" }}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -218,7 +359,10 @@ export default function App() {
       {/* === HEADER BAR === */}
       <div style={{ background: "#C41E2A", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
         <span style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>DULCES PIGUI — Distribuidor NorCal</span>
-        <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <a href="/donde-comprar" onClick={(e) => { e.preventDefault(); navigate("/donde-comprar"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "underline" }}>¿Dónde Comprar?</a>
+          <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
+        </div>
       </div>
 
       {/* === HERO: JOSE + VALUE PROP === */}
