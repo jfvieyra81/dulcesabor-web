@@ -31,11 +31,11 @@ const TX = {
     headerTitle: "DULCES PIGUI — Distribuidor NorCal",
     whereToBuy: "¿Dónde Comprar?",
     heroName: "Jose Flores",
-    heroRole: {t("heroRole")},
-    heroExp: {t("heroExp")},
+    heroRole: "Distribuidor de Dulces Pigüi en Northern California",
+    heroExp: "15 años de experiencia • Entrega personal • Ukiah, CA",
     heroH1a: "Dulces auténticos de México,",
     heroH1b: "directo a su negocio.",
-    heroDesc: "{t("heroDesc")}",
+    heroDesc: "Le llevo los dulces que su clientela conoce y busca. Sin viajar, sin intermediarios, a precio de distribuidor.",
     btnPrices: "Ver Precios",
     btnWA: "Mandar WhatsApp",
     badge1: "✅ Sin pedido mínimo", badge2: "✅ Entrega en la semana", badge3: "✅ Pago al recibir", badge4: "✅ Producto 100% original",
@@ -82,13 +82,13 @@ const TX = {
     why1t: "Entrega directa", why1d: "Le llevo el producto a su puerta. Sin viajar a LA, sin perder un día.",
     why2t: "Mejor precio", why2d: "Desde $1.40 por bolsa. Mientras más compra, menos paga.",
     why3t: "Cero riesgo", why3d: "Sin pedido mínimo, sin contrato. Empiece con una caja.",
-    whyNote: "{t("whyNote")}",
+    whyNote: "Atendemos tiendas, carnicerías y dulcerías en Ukiah, Willits, Santa Rosa, Petaluma, Bay Area, Sacramento y alrededores.",
     faqTitle: "Preguntas comunes",
     ctaTitle: "¿Listo para surtir su negocio?",
     ctaSub: "Mándeme un WhatsApp y le mando precios en minutos.",
     ctaNote: "Le contesto en menos de 2 horas • Lunes a sabado",
     lookupTitle: "🔄 Clientes que regresan",
-    lookupDesc: "{t("lookupDesc")}",
+    lookupDesc: "Ingrese el número de teléfono que usó en su pedido anterior para ver su historial.",
     lookupBtn: "Buscar mis pedidos",
     lookupSearching: "Buscando...",
     lookupNotFound: "No encontramos pedidos con ese número. Puede hacer su primer pedido abajo.",
@@ -104,7 +104,7 @@ const TX = {
     langSwitch: "English",
     caja: "caja", cajas: "cajas",
     storeTitle: "¿Dónde Comprar Dulces Pigüi en NorCal?",
-    storeDesc: "{t("storeDesc")}",
+    storeDesc: "Estos son los negocios que venden Slaps, Mega Huevón y más dulces mexicanos en tu zona. Visítalos y apoya el comercio local. 🇲🇽",
     storeLoading: "Cargando directorio...",
     storeError: "No pudimos cargar el directorio. Intenta más tarde.",
     storeEmpty: "Próximamente listaremos las tiendas que venden nuestros productos.",
@@ -278,7 +278,7 @@ function StoreLocator({ navigate, t }) {
             {t("storeTitle")}
           </h1>
           <p style={{ fontSize: 16, color: "#666", lineHeight: 1.5, margin: 0 }}>
-            Estos son los negocios que venden Slaps, Mega Huevón y más dulces mexicanos en tu zona. Visítalos y apoya el comercio local. 🇲🇽
+            {t("storeDesc")}
           </p>
         </div>
       </div>
@@ -621,8 +621,8 @@ export default function App() {
           <img src={IMG_JOSE} alt="José Flores" style={{ width: 80, height: 80, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", flexShrink: 0, border: "3px solid #D4951A" }} />
           <div>
             <div style={{ fontSize: 22, fontWeight: 700 }}>Jose Flores</div>
-            <div style={{ fontSize: 14, color: "#888" }}>Distribuidor de Dulces Pigüi en Northern California</div>
-            <div style={{ fontSize: 13, color: "#D4951A", fontWeight: 600, marginTop: 4 }}>15 años de experiencia • Entrega personal • Ukiah, CA</div>
+            <div style={{ fontSize: 14, color: "#888" }}>{t("heroRole")}</div>
+            <div style={{ fontSize: 13, color: "#D4951A", fontWeight: 600, marginTop: 4 }}>{t("heroExp")}</div>
           </div>
         </div>
 
@@ -630,7 +630,7 @@ export default function App() {
           {t("heroH1a")}<br /><span style={{ color: "#C41E2A" }}>{t("heroH1b")}</span>
         </h1>
         <p style={{ fontSize: 16, color: "#666", lineHeight: 1.6, margin: "0 0 24px", maxWidth: 500 }}>
-          Le llevo los dulces que su clientela conoce y busca. Sin viajar, sin intermediarios, a precio de distribuidor.
+          {t("heroDesc")}
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           <button onClick={() => go("productos")} style={{ background: "#C41E2A", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>{t("btnPrices")}</button>
@@ -920,7 +920,7 @@ export default function App() {
           ))}
         </div>
         <p style={{ textAlign: "center", fontSize: 13, color: "#999", marginTop: 16 }}>
-          Atendemos tiendas, carnicerías y dulcerías en Ukiah, Willits, Santa Rosa, Petaluma, Bay Area, Sacramento y alrededores.
+          {t("whyNote")}
         </p>
       </div>
 
@@ -965,7 +965,7 @@ export default function App() {
             {!lookupResults && (
               <>
                 <p style={{ fontSize: 14, color: "#666", marginBottom: 16, lineHeight: 1.5 }}>
-                  Ingrese el número de teléfono que usó en su pedido anterior para ver su historial.
+                  {t("lookupDesc")}
                 </p>
                 <input
                   type="tel"
