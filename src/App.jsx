@@ -26,19 +26,206 @@ const P = [
 
 const PROX = ["Piguileta Fuego", "Piguileta Cool", "Cache Colors", "Devoralien", "Devora", "Changaleta", "Chilipekas", "Bolas Don Cuco", "Arenitas"];
 
-const FAQ = [
-  { q: "¿Hay pedido mínimo?", a: "No. Puede empezar con una sola caja para probar. Sin contrato ni compromiso." },
-  { q: "¿Cuánto tarda la entrega?", a: "Dentro de la misma semana para Mendocino, Sonoma, Bay Area y Sacramento." },
-  { q: "¿Cómo pago?", a: "Efectivo al recibir, transferencia, o Zelle. Para clientes frecuentes hay crédito." },
-  { q: "¿Son los dulces originales de México?", a: "Si. De fábrica Pigüi en Guadalajara, Jalisco. El mismo fabricante desde 1987." },
-];
+const TX = {
+  es: {
+    headerTitle: "DULCES PIGUI — Distribuidor NorCal",
+    whereToBuy: "¿Dónde Comprar?",
+    heroName: "Jose Flores",
+    heroRole: {t("heroRole")},
+    heroExp: {t("heroExp")},
+    heroH1a: "Dulces auténticos de México,",
+    heroH1b: "directo a su negocio.",
+    heroDesc: "{t("heroDesc")}",
+    btnPrices: "Ver Precios",
+    btnWA: "Mandar WhatsApp",
+    badge1: "✅ Sin pedido mínimo", badge2: "✅ Entrega en la semana", badge3: "✅ Pago al recibir", badge4: "✅ Producto 100% original",
+    prodTitle: "Productos disponibles",
+    prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Desde 1987",
+    viewDetail: "Detalle", viewQuick: "Hoja rápida",
+    returningBtn: "¿Ya ordenaste antes? Ver mis pedidos",
+    directWA: "Ya sé lo que quiero — WhatsApp directo",
+    chooseFlavor: "Escoja sabor y cajas:",
+    cases: "Cajas:", remove: "✕ Quitar",
+    comingSoon: "Próximamente:",
+    profit: "ganancia",
+    yourPrice: "✓ SU PRECIO",
+    bestSeller: "MÁS VENDIDO",
+    formTitle: "📋 Completar su pedido",
+    formSub: "Llene sus datos y envíe directo por WhatsApp",
+    orderSummary: "RESUMEN DE PEDIDO",
+    total: "Total:",
+    lblBusiness: "Nombre del negocio",
+    lblContact: "Encargado",
+    lblPhone: "Teléfono",
+    lblAddress: "Dirección de entrega",
+    lblPayment: "Forma de pago",
+    phBusiness: "Ej: Carnicería El Ranchero",
+    phContact: "Su nombre",
+    phPhone: "(707) 000-0000",
+    phAddress: "Calle, ciudad, código postal",
+    required: "obligatorio",
+    req10: "10 dígitos",
+    reqSelect: "seleccione una",
+    btnSendWA: "Enviar por WhatsApp",
+    btnSendNoWA: "Enviar sin WhatsApp",
+    sendNote: "Con WhatsApp se abre la conversación directo. Sin WhatsApp, José le llama al teléfono que puso arriba.",
+    confirmTitle: "¡Pedido recibido!",
+    confirmMsg: "José le contactará pronto al",
+    confirmMsg2: "para confirmar su pedido y coordinar la entrega.",
+    btnCall: "Llamar ahora",
+    btnNewOrder: "Hacer otro pedido",
+    cartYourOrder: "Su Pedido",
+    cartEdit: "✏️ Editar Productos",
+    cartEmpty: "Vaciar",
+    cartComplete: "📋 Completar Pedido",
+    whyTitle: "¿Por qué comprarme a mi?",
+    why1t: "Entrega directa", why1d: "Le llevo el producto a su puerta. Sin viajar a LA, sin perder un día.",
+    why2t: "Mejor precio", why2d: "Desde $1.40 por bolsa. Mientras más compra, menos paga.",
+    why3t: "Cero riesgo", why3d: "Sin pedido mínimo, sin contrato. Empiece con una caja.",
+    whyNote: "{t("whyNote")}",
+    faqTitle: "Preguntas comunes",
+    ctaTitle: "¿Listo para surtir su negocio?",
+    ctaSub: "Mándeme un WhatsApp y le mando precios en minutos.",
+    ctaNote: "Le contesto en menos de 2 horas • Lunes a sabado",
+    lookupTitle: "🔄 Clientes que regresan",
+    lookupDesc: "{t("lookupDesc")}",
+    lookupBtn: "Buscar mis pedidos",
+    lookupSearching: "Buscando...",
+    lookupNotFound: "No encontramos pedidos con ese número. Puede hacer su primer pedido abajo.",
+    lookupFound: "Encontramos",
+    lookupOrder: "pedido",
+    lookupOrders: "pedidos",
+    lookupLatest: "MÁS RECIENTE",
+    lookupReorder: "🔄 Ordenar igual",
+    lookupTryAgain: "Intentar de nuevo",
+    lookupOtherNum: "Buscar otro número",
+    footerName: "Jose Flores — Dulce Sabor LLC",
+    footerSub: "Distribuidor Autorizado Dulces Pigüi • Ukiah, California • © 2026",
+    langSwitch: "English",
+    caja: "caja", cajas: "cajas",
+    storeTitle: "¿Dónde Comprar Dulces Pigüi en NorCal?",
+    storeDesc: "{t("storeDesc")}",
+    storeLoading: "Cargando directorio...",
+    storeError: "No pudimos cargar el directorio. Intenta más tarde.",
+    storeEmpty: "Próximamente listaremos las tiendas que venden nuestros productos.",
+    storeMeanwhile: "Mientras tanto, escríbeme por WhatsApp",
+    storeProducts: "Productos disponibles",
+    storeDirections: "🗺️ Cómo llegar",
+    storeAddMe: "Agrégame al directorio",
+    storeHaveStore: "¿Tienes una tienda y vendes Dulces Pigüi?",
+    storeBack: "← DULCES PIGUI — Distribuidor NorCal",
+  },
+  en: {
+    headerTitle: "DULCES PIGUI — NorCal Distributor",
+    whereToBuy: "Where to Buy",
+    heroName: "Jose Flores",
+    heroRole: "Dulces Pigüi Distributor in Northern California",
+    heroExp: "15 years of experience • Personal delivery • Ukiah, CA",
+    heroH1a: "Authentic Mexican candy,",
+    heroH1b: "delivered to your business.",
+    heroDesc: "I bring the candy your customers know and love. No traveling, no middlemen, at distributor pricing.",
+    btnPrices: "See Prices",
+    btnWA: "Send WhatsApp",
+    badge1: "✅ No minimum order", badge2: "✅ Delivery within the week", badge3: "✅ Pay on delivery", badge4: "✅ 100% original product",
+    prodTitle: "Available Products",
+    prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Since 1987",
+    viewDetail: "Detail", viewQuick: "Quick view",
+    returningBtn: "Ordered before? View my orders",
+    directWA: "I know what I want — Direct WhatsApp",
+    chooseFlavor: "Choose flavor and cases:",
+    cases: "Cases:", remove: "✕ Remove",
+    comingSoon: "Coming soon:",
+    profit: "profit",
+    yourPrice: "✓ YOUR PRICE",
+    bestSeller: "BEST SELLER",
+    formTitle: "📋 Complete your order",
+    formSub: "Fill in your details and send directly via WhatsApp",
+    orderSummary: "ORDER SUMMARY",
+    total: "Total:",
+    lblBusiness: "Business name",
+    lblContact: "Contact person",
+    lblPhone: "Phone",
+    lblAddress: "Delivery address",
+    lblPayment: "Payment method",
+    phBusiness: "Ex: El Ranchero Butcher Shop",
+    phContact: "Your name",
+    phPhone: "(707) 000-0000",
+    phAddress: "Street, city, zip code",
+    required: "required",
+    req10: "10 digits",
+    reqSelect: "select one",
+    btnSendWA: "Send via WhatsApp",
+    btnSendNoWA: "Send without WhatsApp",
+    sendNote: "WhatsApp opens a direct conversation. Without WhatsApp, José will call the phone number above.",
+    confirmTitle: "Order received!",
+    confirmMsg: "José will contact you soon at",
+    confirmMsg2: "to confirm your order and arrange delivery.",
+    btnCall: "Call now",
+    btnNewOrder: "Place another order",
+    cartYourOrder: "Your Order",
+    cartEdit: "✏️ Edit Products",
+    cartEmpty: "Clear",
+    cartComplete: "📋 Complete Order",
+    whyTitle: "Why buy from me?",
+    why1t: "Direct delivery", why1d: "I bring the product to your door. No traveling to LA, no wasting a day.",
+    why2t: "Best price", why2d: "From $1.40 per bag. The more you buy, the less you pay.",
+    why3t: "Zero risk", why3d: "No minimum order, no contract. Start with one case.",
+    whyNote: "We serve stores, butcher shops and candy shops in Ukiah, Willits, Santa Rosa, Petaluma, Bay Area, Sacramento and surrounding areas.",
+    faqTitle: "Common Questions",
+    ctaTitle: "Ready to stock your business?",
+    ctaSub: "Send me a WhatsApp and I\'ll send you prices in minutes.",
+    ctaNote: "I respond within 2 hours • Monday to Saturday",
+    lookupTitle: "🔄 Returning customers",
+    lookupDesc: "Enter the phone number you used on your previous order to see your history.",
+    lookupBtn: "Search my orders",
+    lookupSearching: "Searching...",
+    lookupNotFound: "We didn\'t find orders with that number. You can place your first order below.",
+    lookupFound: "We found",
+    lookupOrder: "order",
+    lookupOrders: "orders",
+    lookupLatest: "MOST RECENT",
+    lookupReorder: "🔄 Order again",
+    lookupTryAgain: "Try again",
+    lookupOtherNum: "Search another number",
+    footerName: "Jose Flores — Dulce Sabor LLC",
+    footerSub: "Authorized Distributor Dulces Pigüi • Ukiah, California • © 2026",
+    langSwitch: "Español",
+    caja: "case", cajas: "cases",
+    storeTitle: "Where to Buy Dulces Pigüi in NorCal?",
+    storeDesc: "These are the businesses that sell Slaps, Mega Huevón and more Mexican candy in your area. Visit them and support local business. 🇲🇽",
+    storeLoading: "Loading directory...",
+    storeError: "We couldn\'t load the directory. Try again later.",
+    storeEmpty: "We\'ll soon list stores that sell our products.",
+    storeMeanwhile: "Meanwhile, reach out via WhatsApp",
+    storeProducts: "Products available",
+    storeDirections: "🗺️ Directions",
+    storeAddMe: "Add me to the directory",
+    storeHaveStore: "Do you have a store and sell Dulces Pigüi?",
+    storeBack: "← DULCES PIGUI — NorCal Distributor",
+  }
+};
+
+const FAQ = {
+  es: [
+    { q: "¿Hay pedido mínimo?", a: "No. Puede empezar con una sola caja para probar. Sin contrato ni compromiso." },
+    { q: "¿Cuánto tarda la entrega?", a: "Dentro de la misma semana para Mendocino, Sonoma, Bay Area y Sacramento." },
+    { q: "¿Cómo pago?", a: "Efectivo al recibir, transferencia, o Zelle. Para clientes frecuentes hay crédito." },
+    { q: "¿Son los dulces originales de México?", a: "Si. De fábrica Pigüi en Guadalajara, Jalisco. El mismo fabricante desde 1987." },
+  ],
+  en: [
+    { q: "Is there a minimum order?", a: "No. You can start with just one case to try. No contract, no commitment." },
+    { q: "How long does delivery take?", a: "Within the same week for Mendocino, Sonoma, Bay Area and Sacramento." },
+    { q: "How do I pay?", a: "Cash on delivery, bank transfer, or Zelle. Returning customers get credit terms." },
+    { q: "Are these the original candies from Mexico?", a: "Yes. From the Pigüi factory in Guadalajara, Jalisco. Same manufacturer since 1987." },
+  ]
+};
 
 // === STORE LOCATOR (página /donde-comprar) ===
 // Lee tiendas activas de Supabase public_stores y las agrupa por zona.
 const ZONE_ORDER = ["Santa Rosa / Sonoma", "Sacramento", "San Jose / Bay Area", "Mendocino / Ukiah", "Oakland / Bay Area", "Other"];
 const PUBLIC_INACTIVE_DAYS = 90;
 
-function StoreLocator({ navigate }) {
+function StoreLocator({ navigate, t }) {
   const [stores, setStores] = useState(null);
   const [error, setError] = useState(null);
 
@@ -80,7 +267,7 @@ function StoreLocator({ navigate }) {
 
       {/* Header */}
       <div style={{ background: "#C41E2A", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
-        <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>← DULCES PIGUI — Distribuidor NorCal</a>
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>{t("storeBack")}</a>
         <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
       </div>
 
@@ -88,7 +275,7 @@ function StoreLocator({ navigate }) {
       <div style={{ background: "linear-gradient(135deg, #FFF8E1, #fff)", padding: "40px 20px", textAlign: "center" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <h1 style={{ fontSize: "clamp(28px, 6vw, 40px)", fontWeight: 700, margin: "0 0 12px", lineHeight: 1.2 }}>
-            ¿Dónde Comprar <span style={{ color: "#C41E2A" }}>Dulces Pigüi</span> en NorCal?
+            {t("storeTitle")}
           </h1>
           <p style={{ fontSize: 16, color: "#666", lineHeight: 1.5, margin: 0 }}>
             Estos son los negocios que venden Slaps, Mega Huevón y más dulces mexicanos en tu zona. Visítalos y apoya el comercio local. 🇲🇽
@@ -99,7 +286,7 @@ function StoreLocator({ navigate }) {
       {/* Listings */}
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "30px 20px 80px" }}>
         {error && <div style={{ padding: 24, background: "#FDE8E8", color: "#C41E2A", borderRadius: 8, textAlign: "center" }}>{error}</div>}
-        {!error && stores === null && <div style={{ padding: 40, textAlign: "center", color: "#888" }}>Cargando directorio...</div>}
+        {!error && stores === null && <div style={{ padding: 40, textAlign: "center", color: "#888" }}>{t("storeLoading")}</div>}
         {!error && stores && stores.length === 0 && (
           <div style={{ padding: 40, textAlign: "center", color: "#888" }}>
             <p style={{ marginBottom: 16 }}>Próximamente listaremos las tiendas que venden nuestros productos.</p>
@@ -123,7 +310,7 @@ function StoreLocator({ navigate }) {
                     {store.hours && <div style={{ fontSize: 13, color: "#666", marginBottom: 8 }}>🕐 {store.hours}</div>}
                     {Array.isArray(store.recent_products) && store.recent_products.length > 0 && (
                       <div style={{ marginBottom: 12 }}>
-                        <div style={{ fontSize: 11, color: "#888", textTransform: "uppercase", fontWeight: 600, marginBottom: 4 }}>Productos disponibles</div>
+                        <div style={{ fontSize: 11, color: "#888", textTransform: "uppercase", fontWeight: 600, marginBottom: 4 }}>{t("storeProducts")}</div>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                           {store.recent_products.slice(0, 6).map((p, idx) => (
                             <span key={idx} style={{ fontSize: 11, background: "#FFF8E1", color: "#8B6914", padding: "3px 8px", borderRadius: 4, fontWeight: 600 }}>{p.name}</span>
@@ -132,7 +319,7 @@ function StoreLocator({ navigate }) {
                       </div>
                     )}
                     <div style={{ marginTop: "auto", display: "flex", gap: 6, flexWrap: "wrap" }}>
-                      <a href={mapsLink(store)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 110, textAlign: "center", padding: "8px 12px", background: "#1A73E8", color: "#fff", borderRadius: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}>🗺️ Cómo llegar</a>
+                      <a href={mapsLink(store)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 110, textAlign: "center", padding: "8px 12px", background: "#1A73E8", color: "#fff", borderRadius: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}>{t("storeDirections")}</a>
                       {waLink(store.whatsapp) && (
                         <a href={waLink(store.whatsapp)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 110, textAlign: "center", padding: "8px 12px", background: "#25D366", color: "#fff", borderRadius: 6, textDecoration: "none", fontSize: 13, fontWeight: 600 }}>💬 WhatsApp</a>
                       )}
@@ -146,7 +333,7 @@ function StoreLocator({ navigate }) {
 
         {/* CTA back */}
         <div style={{ textAlign: "center", marginTop: 40, padding: 24, background: "#F9F9F7", borderRadius: 12 }}>
-          <p style={{ fontSize: 14, color: "#666", margin: "0 0 12px" }}>¿Tienes una tienda y vendes Dulces Pigüi?</p>
+          <p style={{ fontSize: 14, color: "#666", margin: "0 0 12px" }}>{t("storeHaveStore")}</p>
           <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20aparecer%20en%20donde-comprar" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: "12px 24px", background: "#C41E2A", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 700 }}>
             Agrégame al directorio
           </a>
@@ -157,6 +344,8 @@ function StoreLocator({ navigate }) {
 }
 
 export default function App() {
+  const [lang, setLang] = useState("es");
+  const t = (k) => (TX[lang] || TX.es)[k] || k;
   const [path, setPath] = useState(typeof window !== "undefined" ? window.location.pathname : "/");
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -403,7 +592,7 @@ export default function App() {
   const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   if (path === "/donde-comprar" || path === "/donde-comprar/") {
-    return <StoreLocator navigate={navigate} />;
+    return <StoreLocator navigate={navigate} t={t} />;
   }
 
   return (
@@ -418,9 +607,10 @@ export default function App() {
 
       {/* === HEADER BAR === */}
       <div style={{ background: "#C41E2A", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
-        <span style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>DULCES PIGUI — Distribuidor NorCal</span>
+        <span style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>{t("headerTitle")}</span>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <a href="/donde-comprar" onClick={(e) => { e.preventDefault(); navigate("/donde-comprar"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "underline" }}>¿Dónde Comprar?</a>
+          <button onClick={() => setLang(l => l === "es" ? "en" : "es")} style={{ background: "rgba(255,255,255,0.2)", color: "#fff", border: "1px solid rgba(255,255,255,0.4)", borderRadius: 4, padding: "4px 10px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("langSwitch")}</button>
+          <a href="/donde-comprar" onClick={(e) => { e.preventDefault(); navigate("/donde-comprar"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "underline" }}>{t("whereToBuy")}</a>
           <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
         </div>
       </div>
@@ -437,23 +627,23 @@ export default function App() {
         </div>
 
         <h1 style={{ fontSize: "clamp(28px, 6vw, 44px)", fontWeight: 700, lineHeight: 1.2, margin: "0 0 8px" }}>
-          Dulces auténticos de México,<br /><span style={{ color: "#C41E2A" }}>directo a su negocio.</span>
+          {t("heroH1a")}<br /><span style={{ color: "#C41E2A" }}>{t("heroH1b")}</span>
         </h1>
         <p style={{ fontSize: 16, color: "#666", lineHeight: 1.6, margin: "0 0 24px", maxWidth: 500 }}>
           Le llevo los dulces que su clientela conoce y busca. Sin viajar, sin intermediarios, a precio de distribuidor.
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <button onClick={() => go("productos")} style={{ background: "#C41E2A", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>Ver Precios</button>
+          <button onClick={() => go("productos")} style={{ background: "#C41E2A", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>{t("btnPrices")}</button>
           <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20me%20interesa%20información%20de%20dulces%20Pigui" target="_blank" rel="noopener noreferrer"
-            style={{ background: "#25D366", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>💬 Mandar WhatsApp</a>
+            style={{ background: "#25D366", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>{t("btnWA")}</a>
         </div>
 
         {/* Trust badges */}
         <div style={{ display: "flex", gap: 16, marginTop: 28, flexWrap: "wrap", fontSize: 12, color: "#888" }}>
-          <span>✅ Sin pedido mínimo</span>
-          <span>✅ Entrega en la semana</span>
-          <span>✅ Pago al recibir</span>
-          <span>✅ Producto 100% original</span>
+          <span>{t("badge1")}</span>
+          <span>{t("badge2")}</span>
+          <span>{t("badge3")}</span>
+          <span>{t("badge4")}</span>
         </div>
       </div>
 
@@ -462,23 +652,23 @@ export default function App() {
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
             <div>
-              <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 4px" }}>Productos disponibles</h2>
+              <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 4px" }}>{t("prodTitle")}</h2>
               <p style={{ fontSize: 14, color: "#888", margin: 0 }}>Dulces Pigüi — Guadalajara, Jalisco — Desde 1987</p>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => setVistaCompacta(false)} style={{ padding: "6px 14px", borderRadius: 6, border: "1px solid #ddd", background: !vistaCompacta ? "#1A1A1A" : "#fff", color: !vistaCompacta ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Detalle</button>
-              <button onClick={() => setVistaCompacta(true)} style={{ padding: "6px 14px", borderRadius: 6, border: "1px solid #ddd", background: vistaCompacta ? "#1A1A1A" : "#fff", color: vistaCompacta ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Hoja rápida</button>
+              <button onClick={() => setVistaCompacta(false)} style={{ padding: "6px 14px", borderRadius: 6, border: "1px solid #ddd", background: !vistaCompacta ? "#1A1A1A" : "#fff", color: !vistaCompacta ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("viewDetail")}</button>
+              <button onClick={() => setVistaCompacta(true)} style={{ padding: "6px 14px", borderRadius: 6, border: "1px solid #ddd", background: vistaCompacta ? "#1A1A1A" : "#fff", color: vistaCompacta ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("viewQuick")}</button>
             </div>
           </div>
 
           <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
             <button onClick={() => setShowLookup(true)}
               style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#E8F5E9", border: "2px solid #2E7D32", borderRadius: 8, fontSize: 14, fontWeight: 700, color: "#2E7D32", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-              🔄 ¿Ya ordenaste antes? Ver mis pedidos
+              {t("returningBtn")}
             </button>
             <a href="https://wa.me/17073607420?text=Hola%20José%2C%20quiero%20repetir%20mi%20pedido%20anterior" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#fff", border: "2px dashed #25D366", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600, color: "#25D366" }}>
-              💬 Ya sé lo que quiero — WhatsApp directo
+              {t("directWA")}
             </a>
           </div>
 
@@ -579,7 +769,7 @@ export default function App() {
           )}
 
           <div style={{ marginTop: 20, padding: 16, background: "#FFF8E1", borderRadius: 8, fontSize: 13 }}>
-            <strong style={{ color: "#D4951A" }}>Próximamente:</strong> {PROX.join(" • ")}
+            <strong style={{ color: "#D4951A" }}>{t("comingSoon")}</strong> {PROX.join(" • ")}
           </div>
         </div>
       </div>
@@ -588,12 +778,12 @@ export default function App() {
       {items.length > 0 && (
         <div id="datos-pedido" style={{ padding: "32px 20px", background: "#fff", borderTop: "3px solid #C41E2A" }}>
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
-            <h3 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 4px" }}>📋 Completar su pedido</h3>
-            <p style={{ fontSize: 13, color: "#888", margin: "0 0 20px" }}>Llene sus datos y envíe directo por WhatsApp</p>
+            <h3 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 4px" }}>{t("formTitle")}</h3>
+            <p style={{ fontSize: 13, color: "#888", margin: "0 0 20px" }}>{t("formSub")}</p>
 
             {/* ORDER SUMMARY */}
             <div style={{ background: "#F9F9F7", borderRadius: 10, padding: 16, marginBottom: 20, border: "1px solid #eee" }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#888", marginBottom: 8 }}>RESUMEN DE PEDIDO</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#888", marginBottom: 8 }}>{t("orderSummary")}</div>
               {items.map(([key, q]) => { const pi = getPI(key); const cp = getCasePrice(pi); const gan = Math.round(cp*0.6); return (
                 <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 0", borderBottom: "1px solid #eee", fontSize: 13 }}>
                   <span style={{ flex: 1 }}>{getLabel(key)} <span style={{ color: "#888" }}>×{q} caja{q>1?"s":""}</span></span>
@@ -601,35 +791,35 @@ export default function App() {
                 </div>
               );})}
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10, paddingTop: 10, borderTop: "2px solid #1A1A1A", fontSize: 16, fontWeight: 700 }}>
-                <span>Total:</span>
-                <span>${total.toFixed(2)} <span style={{ color: "#2E7D32" }}>+${totalGanancia.toFixed(2)} ganancia</span></span>
+                <span>{t("total")}</span>
+                <span>${total.toFixed(2)} <span style={{ color: "#2E7D32" }}>+${totalGanancia.toFixed(2)} {t("profit")}</span></span>
               </div>
             </div>
 
             {/* FORM FIELDS */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.negocio ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.negocio ? 700 : 400 }}>Nombre del negocio *{formErrors.negocio ? " — obligatorio" : ""}</label>
-                <input value={cliente.negocio} onChange={e => { setCliente(c => ({...c, negocio: e.target.value})); if (formErrors.negocio) setFormErrors(f => ({...f, negocio: false})); }} placeholder="Ej: Carnicería El Ranchero"
+                <label style={{ fontSize: 12, color: formErrors.negocio ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.negocio ? 700 : 400 }>{t("lblBusiness")} *{formErrors.negocio ? " — " + t("required") : ""}</label>
+                <input value={cliente.negocio} onChange={e => { setCliente(c => ({...c, negocio: e.target.value})); if (formErrors.negocio) setFormErrors(f => ({...f, negocio: false})); }} placeholder={t("phBusiness")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.negocio ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: formErrors.encargado ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.encargado ? 700 : 400 }}>Encargado *{formErrors.encargado ? " — obligatorio" : ""}</label>
-                <input value={cliente.encargado} onChange={e => { setCliente(c => ({...c, encargado: e.target.value})); if (formErrors.encargado) setFormErrors(f => ({...f, encargado: false})); }} placeholder="Su nombre"
+                <label style={{ fontSize: 12, color: formErrors.encargado ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.encargado ? 700 : 400 }>{t("lblContact")} *{formErrors.encargado ? " — " + t("required") : ""}</label>
+                <input value={cliente.encargado} onChange={e => { setCliente(c => ({...c, encargado: e.target.value})); if (formErrors.encargado) setFormErrors(f => ({...f, encargado: false})); }} placeholder={t("phContact")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.encargado ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: formErrors.tel ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.tel ? 700 : 400 }}>Teléfono *{formErrors.tel ? " — 10 dígitos" : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.tel ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.tel ? 700 : 400 }>{t("lblPhone")} *{formErrors.tel ? " — " + t("req10") : ""}</label>
                 <input value={cliente.tel} onChange={e => { const formatted = formatPhone(e.target.value); setCliente(c => ({...c, tel: formatted})); if (formErrors.tel) setFormErrors(f => ({...f, tel: false})); }} placeholder="(707) 000-0000" type="tel"
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.tel ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.dir ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.dir ? 700 : 400 }}>Dirección de entrega *{formErrors.dir ? " — obligatorio" : ""}</label>
-                <input value={cliente.dir} onChange={e => { setCliente(c => ({...c, dir: e.target.value})); if (formErrors.dir) setFormErrors(f => ({...f, dir: false})); }} placeholder="Calle, ciudad, código postal"
+                <label style={{ fontSize: 12, color: formErrors.dir ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.dir ? 700 : 400 }>{t("lblAddress")} *{formErrors.dir ? " — " + t("required") : ""}</label>
+                <input value={cliente.dir} onChange={e => { setCliente(c => ({...c, dir: e.target.value})); if (formErrors.dir) setFormErrors(f => ({...f, dir: false})); }} placeholder={t("phAddress")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.dir ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.pago ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.pago ? 700 : 400 }}>Forma de pago *{formErrors.pago ? " — seleccione una" : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.pago ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.pago ? 700 : 400 }>{t("lblPayment")} *{formErrors.pago ? " — " + t("reqSelect") : ""}</label>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {["Efectivo", "Zelle", "Transferencia"].map(op => (
                     <button key={op} onClick={() => { setCliente(c => ({...c, pago: c.pago === op ? "" : op})); if (formErrors.pago) setFormErrors(f => ({...f, pago: false})); }}
@@ -645,14 +835,14 @@ export default function App() {
             {orderConfirmed ? (
               <div style={{ marginTop: 20, padding: 24, background: "#E8F5E9", borderRadius: 12, textAlign: "center" }}>
                 <div style={{ fontSize: 40, marginBottom: 8 }}>✅</div>
-                <h3 style={{ fontSize: 20, fontWeight: 700, color: "#2E7D32", margin: "0 0 8px" }}>¡Pedido recibido!</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 700, color: "#2E7D32", margin: "0 0 8px" }}>{t("confirmTitle")}</h3>
                 <p style={{ fontSize: 14, color: "#666", margin: "0 0 16px", lineHeight: 1.5 }}>
-                  José le contactará pronto al <strong>{cliente.tel}</strong> para confirmar su pedido y coordinar la entrega.
+                  {t("confirmMsg")} <strong>{cliente.tel}</strong> {t("confirmMsg2")}
                 </p>
                 <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                  <a href="tel:+17073607420" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 20px", background: "#1A1A1A", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>📞 Llamar ahora</a>
+                  <a href="tel:+17073607420" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 20px", background: "#1A1A1A", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>{t("btnCall")}</a>
                   <button onClick={() => { setOrderConfirmed(false); setCart({}); setCliente({ negocio: "", encargado: "", tel: "", dir: "", pago: "" }); }}
-                    style={{ padding: "10px 20px", background: "#fff", color: "#666", border: "1px solid #ddd", borderRadius: 8, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Hacer otro pedido</button>
+                    style={{ padding: "10px 20px", background: "#fff", color: "#666", border: "1px solid #ddd", borderRadius: 8, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("btnNewOrder")}</button>
                 </div>
               </div>
             ) : (
@@ -660,14 +850,14 @@ export default function App() {
                 <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
                   <button onClick={saveAndSend}
                     style={{ flex: "1 1 200px", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 20px", background: "#25D366", color: "#fff", borderRadius: 10, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-                    💬 Enviar por WhatsApp
+                    {t("btnSendWA")}
                   </button>
                   <button onClick={saveWithoutWA}
                     style={{ flex: "1 1 200px", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 20px", background: "#1A1A1A", color: "#fff", borderRadius: 10, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-                    📧 Enviar sin WhatsApp
+                    {t("btnSendNoWA")}
                   </button>
                 </div>
-                <p style={{ textAlign: "center", fontSize: 11, color: "#999", marginTop: 8 }}>Con WhatsApp se abre la conversación directo. Sin WhatsApp, José le llama al teléfono que puso arriba.</p>
+                <p style={{ textAlign: "center", fontSize: 11, color: "#999", marginTop: 8 }}>{t("sendNote")}</p>
               </>
             )}
           </div>
@@ -681,8 +871,8 @@ export default function App() {
           {cartExpanded && (
             <div style={{ maxWidth: 800, margin: "0 auto", padding: "16px 20px 0" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <span style={{ fontSize: 14, fontWeight: 700, color: "#D4951A" }}>Su Pedido ({items.reduce((s,[,q])=>s+q,0)} caja{items.reduce((s,[,q])=>s+q,0) > 1 ? "s" : ""})</span>
-                <button onClick={() => go("catalogo")} style={{ fontSize: 12, color: "#D4951A", background: "none", border: "1px solid #D4951A", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>✏️ Editar Productos</button>
+                <span style={{ fontSize: 14, fontWeight: 700, color: "#D4951A" }}>{t("cartYourOrder")} ({items.reduce((s,[,q])=>s+q,0)} {items.reduce((s,[,q])=>s+q,0) > 1 ? t("cajas") : t("caja")})</span>
+                <button onClick={() => go("catalogo")} style={{ fontSize: 12, color: "#D4951A", background: "none", border: "1px solid #D4951A", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("cartEdit")}</button>
               </div>
               {items.map(([key, q]) => { const pi = getPI(key); const cp = getCasePrice(pi); return (
                 <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
@@ -702,12 +892,12 @@ export default function App() {
             <div onClick={() => setCartExpanded(!cartExpanded)} style={{ color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
               <span style={{ fontSize: 14, color: "#D4951A", transition: "transform 0.3s", transform: cartExpanded ? "rotate(180deg)" : "rotate(0)" }}>▲</span>
               <strong style={{ fontSize: 22, color: "#fff", lineHeight: 1 }}>${total.toFixed(2)}</strong>
-              <span style={{ color: "#4ADE80", fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} ganancia</span>
+              <span style={{ color: "#4ADE80", fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} {t("profit")}</span>
             </div>
             <div style={{ display: "flex", gap: 10 }}>
-              <button onClick={() => { setCart({}); setCartExpanded(false); }} style={{ flex: "0 0 auto", padding: "14px 20px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Vaciar</button>
+              <button onClick={() => { setCart({}); setCartExpanded(false); }} style={{ flex: "0 0 auto", padding: "14px 20px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("cartEmpty")}</button>
               <button onClick={() => { setCartExpanded(false); go("datos-pedido"); }}
-                style={{ flex: "1 1 auto", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "14px 20px", background: "#C41E2A", color: "#fff", borderRadius: 8, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", boxShadow: "0 2px 10px rgba(196,30,42,0.45)" }}>📋 Completar Pedido</button>
+                style={{ flex: "1 1 auto", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "14px 20px", background: "#C41E2A", color: "#fff", borderRadius: 8, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", boxShadow: "0 2px 10px rgba(196,30,42,0.45)" }}>{t("cartComplete")}</button>
             </div>
           </div>
         </div>
@@ -715,12 +905,12 @@ export default function App() {
 
       {/* === WHY US (COMPACT) === */}
       <div style={{ padding: "40px 20px", maxWidth: 800, margin: "0 auto" }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>¿Por qué comprarme a mi?</h2>
+        <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>{t("whyTitle")}</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
           {[
-            { e: "🚚", t: "Entrega directa", d: "Le llevo el producto a su puerta. Sin viajar a LA, sin perder un día." },
-            { e: "💰", t: "Mejor precio", d: "Desde $1.40 por bolsa. Mientras más compra, menos paga." },
-            { e: "✅", t: "Cero riesgo", d: "Sin pedido mínimo, sin contrato. Empiece con una caja." },
+            { e: "🚚", t: t("why1t"), d: t("why1d") },
+            { e: "💰", t: t("why2t"), d: t("why2d") },
+            { e: "✅", t: t("why3t"), d: t("why3d") },
           ].map((b, i) => (
             <div key={i} style={{ padding: 20, background: "#F9F9F7", borderRadius: 10, textAlign: "center" }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{b.e}</div>
@@ -737,8 +927,8 @@ export default function App() {
       {/* === FAQ (SHORT) === */}
       <div style={{ background: "#F9F9F7", padding: "40px 20px" }}>
         <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>Preguntas comunes</h2>
-          {FAQ.map((f, i) => (
+          <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>{t("faqTitle")}</h2>
+          {(FAQ[lang] || FAQ.es).map((f, i) => (
             <div key={i} style={{ borderBottom: "1px solid #eee" }}>
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: "100%", padding: "16px 0", background: "none", border: "none", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'DM Sans', sans-serif", textAlign: "left" }}>
                 <span style={{ fontSize: 15, fontWeight: 600, color: "#1A1A1A" }}>{f.q}</span>
@@ -754,11 +944,11 @@ export default function App() {
 
       {/* === BIG CTA === */}
       <div style={{ background: "#C41E2A", padding: "40px 20px", textAlign: "center" }}>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: "0 0 8px" }}>¿Listo para surtir su negocio?</h2>
-        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.8)", margin: "0 0 24px" }}>Mándeme un WhatsApp y le mando precios en minutos.</p>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: "0 0 8px" }}>{t("ctaTitle")}</h2>
+        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.8)", margin: "0 0 24px" }}>{t("ctaSub")}</p>
         <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20información%20de%20precios" target="_blank" rel="noopener noreferrer"
           style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#C41E2A", padding: "16px 36px", borderRadius: 8, fontSize: 20, fontWeight: 700, textDecoration: "none" }}>💬 (707) 360-7420</a>
-        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 12 }}>Le contesto en menos de 2 horas • Lunes a sabado</p>
+        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 12 }}>{t("ctaNote")}</p>
       </div>
 
       {/* === RETURNING CUSTOMER LOOKUP MODAL === */}
@@ -767,7 +957,7 @@ export default function App() {
           onClick={(e) => { if (e.target === e.currentTarget) { setShowLookup(false); setLookupResults(null); setLookupPhone(""); } }}>
           <div style={{ background: "#fff", borderRadius: 14, maxWidth: 500, width: "100%", padding: 24, boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: "#1A1A1A" }}>🔄 Clientes que regresan</h2>
+              <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: "#1A1A1A" }}>{t("lookupTitle")}</h2>
               <button onClick={() => { setShowLookup(false); setLookupResults(null); setLookupPhone(""); }}
                 style={{ background: "none", border: "none", fontSize: 24, cursor: "pointer", color: "#999", padding: 0, lineHeight: 1 }}>×</button>
             </div>
@@ -814,7 +1004,7 @@ export default function App() {
                   const isLatest = idx === 0;
                   return (
                     <div key={idx} style={{ border: isLatest ? "2px solid #C41E2A" : "1px solid #ddd", borderRadius: 10, padding: 16, marginBottom: 12, position: "relative" }}>
-                      {isLatest && <div style={{ position: "absolute", top: -10, left: 12, background: "#C41E2A", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 4, letterSpacing: 1 }}>MÁS RECIENTE</div>}
+                      {isLatest && <div style={{ position: "absolute", top: -10, left: 12, background: "#C41E2A", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 4, letterSpacing: 1 }}>{t("lookupLatest")}</div>}
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                         <div style={{ fontSize: 13, color: "#888" }}>{order.fecha}</div>
                         <div style={{ fontSize: 16, fontWeight: 700, color: "#C41E2A" }}>${order.total || "—"}</div>
@@ -850,8 +1040,8 @@ export default function App() {
 
       {/* === FOOTER === */}
       <div style={{ background: "#1A1A1A", padding: "24px 20px", textAlign: "center" }}>
-        <div style={{ fontSize: 14, color: "#D4951A", fontWeight: 600, marginBottom: 4 }}>Jose Flores — Dulce Sabor LLC</div>
-        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>Distribuidor Autorizado Dulces Pigüi • Ukiah, California • © 2026</div>
+        <div style={{ fontSize: 14, color: "#D4951A", fontWeight: 600, marginBottom: 4 }}>{t("footerName")}</div>
+        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>{t("footerSub")}</div>
       </div>
     </div>
   );
