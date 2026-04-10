@@ -800,27 +800,27 @@ export default function App() {
             {/* FORM FIELDS */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.negocio ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.negocio ? 700 : 400 }>{t("lblBusiness")} *{formErrors.negocio ? " — " + t("required") : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.negocio ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.negocio ? 700 : 400 }}>{t("lblBusiness")} *{formErrors.negocio ? " — " + t("required") : ""}</label>
                 <input value={cliente.negocio} onChange={e => { setCliente(c => ({...c, negocio: e.target.value})); if (formErrors.negocio) setFormErrors(f => ({...f, negocio: false})); }} placeholder={t("phBusiness")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.negocio ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: formErrors.encargado ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.encargado ? 700 : 400 }>{t("lblContact")} *{formErrors.encargado ? " — " + t("required") : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.encargado ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.encargado ? 700 : 400 }}>{t("lblContact")} *{formErrors.encargado ? " — " + t("required") : ""}</label>
                 <input value={cliente.encargado} onChange={e => { setCliente(c => ({...c, encargado: e.target.value})); if (formErrors.encargado) setFormErrors(f => ({...f, encargado: false})); }} placeholder={t("phContact")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.encargado ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: formErrors.tel ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.tel ? 700 : 400 }>{t("lblPhone")} *{formErrors.tel ? " — " + t("req10") : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.tel ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.tel ? 700 : 400 }}>{t("lblPhone")} *{formErrors.tel ? " — " + t("req10") : ""}</label>
                 <input value={cliente.tel} onChange={e => { const formatted = formatPhone(e.target.value); setCliente(c => ({...c, tel: formatted})); if (formErrors.tel) setFormErrors(f => ({...f, tel: false})); }} placeholder="(707) 000-0000" type="tel"
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.tel ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.dir ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.dir ? 700 : 400 }>{t("lblAddress")} *{formErrors.dir ? " — " + t("required") : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.dir ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.dir ? 700 : 400 }}>{t("lblAddress")} *{formErrors.dir ? " — " + t("required") : ""}</label>
                 <input value={cliente.dir} onChange={e => { setCliente(c => ({...c, dir: e.target.value})); if (formErrors.dir) setFormErrors(f => ({...f, dir: false})); }} placeholder={t("phAddress")}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.dir ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: formErrors.pago ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.pago ? 700 : 400 }>{t("lblPayment")} *{formErrors.pago ? " — " + t("reqSelect") : ""}</label>
+                <label style={{ fontSize: 12, color: formErrors.pago ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.pago ? 700 : 400 }}>{t("lblPayment")} *{formErrors.pago ? " — " + t("reqSelect") : ""}</label>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {["Efectivo", "Zelle", "Transferencia"].map(op => (
                     <button key={op} onClick={() => { setCliente(c => ({...c, pago: c.pago === op ? "" : op})); if (formErrors.pago) setFormErrors(f => ({...f, pago: false})); }}
