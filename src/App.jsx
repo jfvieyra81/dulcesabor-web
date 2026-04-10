@@ -18,11 +18,11 @@ const TIER_LABELS = ["1-4 cajas","5-9 cajas","10-19 cajas","20+ cajas"];
 const getTier = (q) => q >= 20 ? 3 : q >= 10 ? 2 : q >= 5 ? 1 : 0;
 
 const P = [
-  { name: "Cachetadas / Slaps", sub: "Paletas de caramelo macizo con chile — 7 sabores", pres: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tag:"MÁS VENDIDO", tagColor:"#D4951A", sabores:["Tamarindo","Manzana Verde","Mix","DobleX"] },
-  { name: "Mega Huevón Display", sub: "Dulce de pulpa confitada picosita — Tamarindo", pres: "16 displays/caja", up:["$5.25","$5.00","$4.85","$4.65"], cp:[84, 80, 77.60, 74.40], img: IMG_MEGA_HUEVON_DISPLAY, tag:"NUEVO", tagColor:"#C41E2A" },
-  { name: "Mega Huevón Bolsa", sub: "Pulpa confitada — ideal para granel y piñateros", pres: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tag:"GRANEL", tagColor:"#7B1FA2" },
-  { name: "Flamkiyos", sub: "Pulpa tipo tamarindo cubierto de chile — sabor intenso", pres: "12 bolsas/caja", up:["$7.75","$7.35","$7.15","$6.80"], cp:[93, 88.20, 85.80, 81.60], img: IMG_FLAMKIYOS, tag:"INTENSO", tagColor:"#E65100" },
-  { name: "Mordidilla", sub: "Paleta suave enchilada — clásico de Pigüi", pres: "12 bolsas/caja", up:["$5.00","$4.75","$4.60","$4.40"], cp:[60, 57, 55.20, 52.80], img: IMG_MORDIDILLA, tag:"CLÁSICO", tagColor:"#2E7D32" },
+  { name: "Cachetadas / Slaps", subKey: "subSlaps", pres: "25 bags/case", presEs: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tagKey:"tagBest", tagColor:"#D4951A", sabores:["Tamarindo","Manzana Verde","Mix","DobleX"] },
+  { name: "Mega Huevón Display", subKey: "subHuevonD", pres: "16 displays/case", presEs: "16 displays/caja", up:["$5.25","$5.00","$4.85","$4.65"], cp:[84, 80, 77.60, 74.40], img: IMG_MEGA_HUEVON_DISPLAY, tagKey:"tagNew", tagColor:"#C41E2A" },
+  { name: "Mega Huevón Bolsa", subKey: "subHuevonB", pres: "10 bags/case", presEs: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tagKey:"tagBulk", tagColor:"#7B1FA2" },
+  { name: "Flamkiyos", subKey: "subFlamkiyos", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$7.75","$7.35","$7.15","$6.80"], cp:[93, 88.20, 85.80, 81.60], img: IMG_FLAMKIYOS, tagKey:"tagIntense", tagColor:"#E65100" },
+  { name: "Mordidilla", subKey: "subMordidilla", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$5.00","$4.75","$4.60","$4.40"], cp:[60, 57, 55.20, 52.80], img: IMG_MORDIDILLA, tagKey:"tagClassic", tagColor:"#2E7D32" },
 ];
 
 const PROX = ["Piguileta Fuego", "Piguileta Cool", "Cache Colors", "Devoralien", "Devora", "Changaleta", "Chilipekas", "Bolas Don Cuco", "Arenitas"];
@@ -41,7 +41,7 @@ const TX = {
     btnWA: "Mandar WhatsApp",
     badge1: "✅ Sin pedido mínimo", badge2: "✅ Entrega en la semana", badge3: "✅ Pago al recibir", badge4: "✅ Producto 100% original",
     prodTitle: "Productos disponibles",
-    prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Desde 1987",
+    prodSub: "{t("prodSub")}",
     viewDetail: "Detalle", viewQuick: "Hoja rápida",
     returningBtn: "¿Ya ordenaste antes? Ver mis pedidos",
     directWA: "Ya sé lo que quiero — WhatsApp directo",
@@ -104,6 +104,14 @@ const TX = {
     footerSub: "Distribuidor Autorizado Dulces Pigüi • Ukiah, California • © 2026",
     langSwitch: "English",
     caja: "caja", cajas: "cajas",
+    perCase: "/caja",
+    tierLabels: ["1-4 cajas","5-9 cajas","10-19 cajas","20+ cajas"],
+    subSlaps: "Paletas de caramelo macizo con chile — 7 sabores",
+    subHuevonD: "Dulce de pulpa confitada picosita — Tamarindo",
+    subHuevonB: "Pulpa confitada — ideal para granel y piñateros",
+    subFlamkiyos: "Pulpa tipo tamarindo cubierto de chile — sabor intenso",
+    subMordidilla: "Paleta suave enchilada — clásico de Pigüi",
+    tagBest: "MÁS VENDIDO", tagNew: "NUEVO", tagBulk: "GRANEL", tagIntense: "INTENSO", tagClassic: "CLÁSICO",
     storeTitle: "¿Dónde Comprar Dulces Pigüi en NorCal?",
     storeDesc: "Estos son los negocios que venden Slaps, Mega Huevón y más dulces mexicanos en tu zona. Visítalos y apoya el comercio local. 🇲🇽",
     storeLoading: "Cargando directorio...",
@@ -192,6 +200,14 @@ const TX = {
     footerSub: "Authorized Distributor Dulces Pigüi • Ukiah, California • © 2026",
     langSwitch: "Español",
     caja: "case", cajas: "cases",
+    perCase: "/case",
+    tierLabels: ["1-4 cases","5-9 cases","10-19 cases","20+ cases"],
+    subSlaps: "Hard candy lollipops with chili — 7 flavors",
+    subHuevonD: "Candied spicy tamarind pulp — Tamarindo flavor",
+    subHuevonB: "Candied pulp — ideal for bulk and party supplies",
+    subFlamkiyos: "Tamarind-style pulp covered in chili — intense flavor",
+    subMordidilla: "Soft chili-coated lollipop — Pigüi classic",
+    tagBest: "BEST SELLER", tagNew: "NEW", tagBulk: "BULK", tagIntense: "INTENSE", tagClassic: "CLASSIC",
     storeTitle: "Where to Buy Dulces Pigüi in NorCal?",
     storeDesc: "These are the businesses that sell Slaps, Mega Huevón and more Mexican candy in your area. Visit them and support local business. 🇲🇽",
     storeLoading: "Loading directory...",
@@ -368,7 +384,7 @@ export default function App() {
   const getLabel = (key) => { const parts = key.split("_"); const p = P[parts[0]]; return parts[1] ? p.name + " (" + parts[1] + ")" : p.name; };
   const getQtyForProduct = (pi) => Object.entries(cart).filter(([k]) => getPI(k) === pi).reduce((s,[,q]) => s+q, 0);
   const items = Object.entries(cart).filter(([, q]) => q > 0);
-  const getCasePrice = (pi) => { const t = getTier(getQtyForProduct(pi)); return P[pi].cp[t]; };
+  const getCasePrice = (pi) => { const ti = getTier(getQtyForProduct(pi)); return P[pi].cp[ti]; };
   const total = items.reduce((s, [key, q]) => s + getCasePrice(getPI(key)) * q, 0);
   const totalGanancia = items.reduce((s, [key, q]) => { const pi = getPI(key); const cp = getCasePrice(pi); return s + Math.round(cp * 0.6) * q; }, 0);
   const [openFaq, setOpenFaq] = useState(null);
@@ -680,7 +696,7 @@ export default function App() {
                   <img src={p.img} alt={p.name} style={{ width: 40, height: 55, objectFit: "contain", borderRadius: 4, flexShrink: 0 }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
-                    <div style={{ fontSize: 12, color: "#888" }}>{(() => { const t = getTier(getQtyForProduct(i)); return "$"+p.cp[t].toFixed(2); })()}/caja — <span style={{ color: "#2E7D32" }}>+${Math.round(p.cp[getTier(getQtyForProduct(i))]*0.6)} ganancia</span></div>
+                    <div style={{ fontSize: 12, color: "#888" }}>{(() => { const ti = getTier(getQtyForProduct(i)); return "$"+p.cp[ti].toFixed(2); })()} {t("perCase")} — <span style={{ color: "#2E7D32" }}>+${Math.round(p.cp[getTier(getQtyForProduct(i))]*0.6)} {t("profit")}</span></div>
                   </div>
                   {p.sabores ? (
                     <div style={{ display: "flex", flexDirection: "column", gap: 4, flexShrink: 0 }}>
@@ -712,34 +728,34 @@ export default function App() {
                   <img src={p.img} alt={p.name} style={{ width: 120, height: 165, objectFit: "contain", borderRadius: 8, flexShrink: 0, background: "#f5f5f5" }} />
                   <div style={{ flex: "1 1 300px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
-                      <span style={{ fontSize: 10, fontWeight: 700, color: "#fff", background: p.tagColor || "#C41E2A", padding: "2px 8px", borderRadius: 4 }}>{p.tag}</span>
-                      <span style={{ fontSize: 11, color: "#aaa" }}>{p.pres}</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: "#fff", background: p.tagColor || "#C41E2A", padding: "2px 8px", borderRadius: 4 }}>{t(p.tagKey)}</span>
+                      <span style={{ fontSize: 11, color: "#aaa" }}>{lang === "es" ? p.presEs : p.pres}</span>
                     </div>
                     <h3 style={{ fontSize: 20, fontWeight: 700, margin: "6px 0 4px" }}>{p.name}</h3>
-                    <p style={{ fontSize: 13, color: "#888", margin: "0 0 8px" }}>{p.sub}</p>
-                    {(() => { const totalQ = getQtyForProduct(i); const t = totalQ > 0 ? getTier(totalQ) : 0; const cp = p.cp[t]; const gan = Math.round(cp*0.6); const pct = Math.round((gan/cp)*100); return (
+                    <p style={{ fontSize: 13, color: "#888", margin: "0 0 8px" }}>{t(p.subKey)}</p>
+                    {(() => { const totalQ = getQtyForProduct(i); const ti = totalQ > 0 ? getTier(totalQ) : 0; const cp = p.cp[ti]; const gan = Math.round(cp*0.6); const pct = Math.round((gan/cp)*100); return (
                       <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", background: "#E8F5E9", borderRadius: 6, marginBottom: 12, fontSize: 13, flexWrap: "wrap" }}>
-                        <strong>${cp.toFixed(2)}/caja</strong>
-                        <span style={{ color: "#2E7D32", fontWeight: 700 }}>+ ${gan} ganancia ({pct}%)</span>
-                        {totalQ >= 5 && <span style={{ fontSize: 10, color: "#D4951A", fontWeight: 600 }}>🎉 Tier {TIER_LABELS[t]}</span>}
+                        <strong>${cp.toFixed(2)} {t("perCase")}</strong>
+                        <span style={{ color: "#2E7D32", fontWeight: 700 }}>+ ${gan} {t("profit")} ({pct}%)</span>
+                        {totalQ >= 5 && <span style={{ fontSize: 10, color: "#D4951A", fontWeight: 600 }}>🎉 Tier {t("tierLabels")[ti]}</span>}
                       </div>
                     );})()}
                     {(() => { const totalQ = getQtyForProduct(i); const activeTier = totalQ > 0 ? getTier(totalQ) : -1; return (
                       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6, marginBottom: 12 }}>
-                        {TIER_LABELS.map((label, j) => (
+                        {t("tierLabels").map((label, j) => (
                           <div key={j} style={{ textAlign: "center", padding: "8px 4px", borderRadius: 6, background: activeTier === j ? "#E8F5E9" : j === 3 ? "#FFF3E0" : "#F9F9F7", border: activeTier === j ? "2px solid #2E7D32" : j === 3 ? "2px solid #D4951A" : "1px solid #eee", transition: "all 0.3s" }}>
                             <div style={{ fontSize: 10, color: activeTier === j ? "#2E7D32" : "#888" }}>{label}</div>
                             <div style={{ fontSize: 11, color: "#aaa" }}>{p.up[j]}/u</div>
                             <div style={{ fontSize: 16, fontWeight: 700, color: activeTier === j ? "#2E7D32" : j === 3 ? "#D4951A" : "#1A1A1A" }}>${p.cp[j].toFixed(2)}</div>
-                            <div style={{ fontSize: 9, color: activeTier === j ? "#2E7D32" : "#aaa" }}>/caja</div>
-                            {activeTier === j && <div style={{ fontSize: 9, fontWeight: 700, color: "#2E7D32", marginTop: 2 }}>✓ SU PRECIO</div>}
+                            <div style={{ fontSize: 9, color: activeTier === j ? "#2E7D32" : "#aaa" }}>{t("perCase")}</div>
+                            {activeTier === j && <div style={{ fontSize: 9, fontWeight: 700, color: "#2E7D32", marginTop: 2 }}>{t("yourPrice")}</div>}
                           </div>
                         ))}
                       </div>
                     );})()}
                     {p.sabores ? (
                       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: "#1A1A1A" }}>Escoja sabor y cajas:</span>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: "#1A1A1A" }}>{t("chooseFlavor")}</span>
                         {p.sabores.map((s, si) => { const key = i+"_"+s; return (
                           <div key={si} style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                             <span style={{ fontSize: 13, color: "#666", minWidth: 100 }}>{s}</span>
