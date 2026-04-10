@@ -352,7 +352,7 @@ export default function App() {
 
       {/* FLOATING WHATSAPP - hidden when cart shows */}
       {items.length === 0 && <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer"
-        style={{ position: "absolute", top: sY + (typeof window !== "undefined" ? window.innerHeight : 800) - 90, right: 20, zIndex: 999, background: "#25D366", color: "#fff", width: 56, height: 56, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, textDecoration: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}>
+        style={{ position: "fixed", bottom: "calc(20px + env(safe-area-inset-bottom))", right: 20, zIndex: 999, background: "#25D366", color: "#fff", width: 56, height: 56, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, textDecoration: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}>
         💬
       </a>}
 
@@ -593,7 +593,7 @@ export default function App() {
 
       {/* STICKY CART BAR */}
       {items.length > 0 && (
-        <div style={{ position: "absolute", top: sY + (typeof window !== "undefined" ? window.innerHeight : 800) - (cartExpanded ? (items.length * 48 + 130) : 70), left: 0, right: 0, zIndex: 998, background: "#1A1A1A", boxShadow: "0 -4px 12px rgba(0,0,0,0.15)", transition: "top 0.3s ease" }}>
+        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 998, background: "#1A1A1A", boxShadow: "0 -4px 12px rgba(0,0,0,0.15)", paddingBottom: "env(safe-area-inset-bottom)" }}>
           {/* Expandable cart summary */}
           {cartExpanded && (
             <div style={{ maxWidth: 800, margin: "0 auto", padding: "16px 20px 0" }}>
@@ -615,16 +615,16 @@ export default function App() {
             </div>
           )}
           {/* Main bar */}
-          <div style={{ maxWidth: 800, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap", padding: "12px 20px" }}>
-            <div onClick={() => setCartExpanded(!cartExpanded)} style={{ color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ fontSize: 16, transition: "transform 0.3s", transform: cartExpanded ? "rotate(180deg)" : "rotate(0)" }}>▲</span>
-              <strong style={{ fontSize: 18 }}>${total.toFixed(2)}</strong>
-              <span style={{ color: "#2E7D32", marginLeft: 4, fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} ganancia</span>
+          <div style={{ maxWidth: 800, margin: "0 auto", padding: "14px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
+            <div onClick={() => setCartExpanded(!cartExpanded)} style={{ color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              <span style={{ fontSize: 14, color: "#D4951A", transition: "transform 0.3s", transform: cartExpanded ? "rotate(180deg)" : "rotate(0)" }}>▲</span>
+              <strong style={{ fontSize: 22, color: "#fff", lineHeight: 1 }}>${total.toFixed(2)}</strong>
+              <span style={{ color: "#4ADE80", fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} ganancia</span>
             </div>
-            <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => { setCart({}); setCartExpanded(false); }} style={{ padding: "10px 14px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.2)", background: "none", color: "rgba(255,255,255,0.6)", fontSize: 12, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Vaciar</button>
+            <div style={{ display: "flex", gap: 10 }}>
+              <button onClick={() => { setCart({}); setCartExpanded(false); }} style={{ flex: "0 0 auto", padding: "14px 20px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Vaciar</button>
               <button onClick={() => { setCartExpanded(false); go("datos-pedido"); }}
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 24px", background: "#C41E2A", color: "#fff", borderRadius: 8, fontSize: 15, fontWeight: 700, border: "none", cursor: "pointer", whiteSpace: "nowrap", fontFamily: "'DM Sans',sans-serif" }}>📋 Completar Pedido</button>
+                style={{ flex: "1 1 auto", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "14px 20px", background: "#C41E2A", color: "#fff", borderRadius: 8, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", boxShadow: "0 2px 10px rgba(196,30,42,0.45)" }}>📋 Completar Pedido</button>
             </div>
           </div>
         </div>
