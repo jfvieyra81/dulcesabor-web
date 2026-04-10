@@ -194,6 +194,33 @@ export default function App() {
   // Normalize phone: keep only digits
   const normalizePhone = (p) => (p || "").replace(/\D/g, "");
 
+  const [formErrors, setFormErrors] = useState({});
+
+  // Auto-format phone as (XXX) XXX-XXXX
+  const formatPhone = (raw) => {
+    const d = raw.replace(/\D/g, "").slice(0, 10);
+    if (d.length === 0) return "";
+    if (d.length <= 3) return "(" + d;
+    if (d.length <= 6) return "(" + d.slice(0,3) + ") " + d.slice(3);
+    return "(" + d.slice(0,3) + ") " + d.slice(3,6) + "-" + d.slice(6);
+  };
+
+  const validateForm = () => {
+    const errs = {};
+    if (!cliente.negocio.trim()) errs.negocio = true;
+    if (!cliente.encargado.trim()) errs.encargado = true;
+    if (normalizePhone(cliente.tel).length < 10) errs.tel = true;
+    if (!cliente.dir.trim()) errs.dir = true;
+    if (!cliente.pago) errs.pago = true;
+    setFormErrors(errs);
+    if (Object.keys(errs).length > 0) {
+      // Scroll to form so user sees errors
+      document.getElementById("datos-pedido")?.scrollIntoView({ behavior: "smooth" });
+      return false;
+    }
+    return true;
+  };
+
   // Map cart keys (web) to CRM product IDs (for automatic order import to CRM)
   const CART_TO_CRM = {
     "0_Mix": "slaps-mix", "0_Tamarindo": "slaps-tam", "0_Mango": "slaps-mgo",
@@ -242,6 +269,7 @@ export default function App() {
   };
 
   const saveAndSend = async () => {
+    if (!validateForm()) return;
     const phone = normalizePhone(cliente.tel);
     if (phone) {
       const newOrder = { cart, cliente, fecha: new Date().toLocaleDateString(), total: total.toFixed(2) };
@@ -276,13 +304,8 @@ export default function App() {
   };
 
   const saveWithoutWA = async () => {
+    if (!validateForm()) return;
     const phone = normalizePhone(cliente.tel);
-    if (!phone || phone.length < 7) {
-      // Brief visual hint — field border flash
-      const el = document.querySelector('input[type="tel"]');
-      if (el) { el.style.border = "2px solid #C41E2A"; setTimeout(() => { el.style.border = "1px solid #ddd"; }, 1500); }
-      return;
-    }
     const newOrder = { cart, cliente, fecha: new Date().toLocaleDateString(), total: total.toFixed(2) };
     saveOrderToCloud(phone, newOrder);
     if (cloudEnabled) {
@@ -586,31 +609,31 @@ export default function App() {
             {/* FORM FIELDS */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: "#888", marginBottom: 4, display: "block" }}>Nombre del negocio</label>
-                <input value={cliente.negocio} onChange={e => setCliente(c => ({...c, negocio: e.target.value}))} placeholder="Ej: Carnicería El Ranchero"
-                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
+                <label style={{ fontSize: 12, color: formErrors.negocio ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.negocio ? 700 : 400 }}>Nombre del negocio *{formErrors.negocio ? " — obligatorio" : ""}</label>
+                <input value={cliente.negocio} onChange={e => { setCliente(c => ({...c, negocio: e.target.value})); if (formErrors.negocio) setFormErrors(f => ({...f, negocio: false})); }} placeholder="Ej: Carnicería El Ranchero"
+                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.negocio ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: "#888", marginBottom: 4, display: "block" }}>Encargado</label>
-                <input value={cliente.encargado} onChange={e => setCliente(c => ({...c, encargado: e.target.value}))} placeholder="Su nombre"
-                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
+                <label style={{ fontSize: 12, color: formErrors.encargado ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.encargado ? 700 : 400 }}>Encargado *{formErrors.encargado ? " — obligatorio" : ""}</label>
+                <input value={cliente.encargado} onChange={e => { setCliente(c => ({...c, encargado: e.target.value})); if (formErrors.encargado) setFormErrors(f => ({...f, encargado: false})); }} placeholder="Su nombre"
+                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.encargado ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: "#888", marginBottom: 4, display: "block" }}>Teléfono</label>
-                <input value={cliente.tel} onChange={e => setCliente(c => ({...c, tel: e.target.value}))} placeholder="(707) 000-0000" type="tel"
-                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
+                <label style={{ fontSize: 12, color: formErrors.tel ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.tel ? 700 : 400 }}>Teléfono *{formErrors.tel ? " — 10 dígitos" : ""}</label>
+                <input value={cliente.tel} onChange={e => { const formatted = formatPhone(e.target.value); setCliente(c => ({...c, tel: formatted})); if (formErrors.tel) setFormErrors(f => ({...f, tel: false})); }} placeholder="(707) 000-0000" type="tel"
+                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.tel ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: "#888", marginBottom: 4, display: "block" }}>Dirección de entrega</label>
-                <input value={cliente.dir} onChange={e => setCliente(c => ({...c, dir: e.target.value}))} placeholder="Calle, ciudad, código postal"
-                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
+                <label style={{ fontSize: 12, color: formErrors.dir ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.dir ? 700 : 400 }}>Dirección de entrega *{formErrors.dir ? " — obligatorio" : ""}</label>
+                <input value={cliente.dir} onChange={e => { setCliente(c => ({...c, dir: e.target.value})); if (formErrors.dir) setFormErrors(f => ({...f, dir: false})); }} placeholder="Calle, ciudad, código postal"
+                  style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: formErrors.dir ? "2px solid #C41E2A" : "1px solid #ddd", fontSize: 14, fontFamily: "'DM Sans',sans-serif", boxSizing: "border-box" }} />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={{ fontSize: 12, color: "#888", marginBottom: 4, display: "block" }}>Forma de pago</label>
+                <label style={{ fontSize: 12, color: formErrors.pago ? "#C41E2A" : "#888", marginBottom: 4, display: "block", fontWeight: formErrors.pago ? 700 : 400 }}>Forma de pago *{formErrors.pago ? " — seleccione una" : ""}</label>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {["Efectivo", "Zelle", "Transferencia"].map(op => (
-                    <button key={op} onClick={() => setCliente(c => ({...c, pago: c.pago === op ? "" : op}))}
-                      style={{ padding: "8px 18px", borderRadius: 6, border: cliente.pago === op ? "2px solid #C41E2A" : "1px solid #ddd", background: cliente.pago === op ? "#FFF3F3" : "#fff", cursor: "pointer", fontSize: 13, fontWeight: cliente.pago === op ? 700 : 400, color: cliente.pago === op ? "#C41E2A" : "#666", fontFamily: "'DM Sans',sans-serif" }}>
+                    <button key={op} onClick={() => { setCliente(c => ({...c, pago: c.pago === op ? "" : op})); if (formErrors.pago) setFormErrors(f => ({...f, pago: false})); }}
+                      style={{ padding: "8px 18px", borderRadius: 6, border: cliente.pago === op ? "2px solid #C41E2A" : formErrors.pago ? "2px solid #C41E2A" : "1px solid #ddd", background: cliente.pago === op ? "#FFF3F3" : "#fff", cursor: "pointer", fontSize: 13, fontWeight: cliente.pago === op ? 700 : 400, color: cliente.pago === op ? "#C41E2A" : "#666", fontFamily: "'DM Sans',sans-serif" }}>
                       {op}
                     </button>
                   ))}
