@@ -1,3 +1,4 @@
+// i18n v1 — 2026-04-10
 import { useState, useEffect, useRef } from "react";
 import { SUPABASE_URL, SUPABASE_KEY } from "./config.js";
 
