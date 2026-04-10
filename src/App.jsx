@@ -189,6 +189,7 @@ export default function App() {
   const [lookupPhone, setLookupPhone] = useState("");
   const [lookupResults, setLookupResults] = useState(null);
   const [lookupLoading, setLookupLoading] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   // Normalize phone: keep only digits
   const normalizePhone = (p) => (p || "").replace(/\D/g, "");
@@ -272,6 +273,42 @@ export default function App() {
       }
     }
     window.open("https://wa.me/17073607420?text=" + orderMsg(), "_blank");
+  };
+
+  const saveWithoutWA = async () => {
+    const phone = normalizePhone(cliente.tel);
+    if (!phone || phone.length < 7) {
+      // Brief visual hint — field border flash
+      const el = document.querySelector('input[type="tel"]');
+      if (el) { el.style.border = "2px solid #C41E2A"; setTimeout(() => { el.style.border = "1px solid #ddd"; }, 1500); }
+      return;
+    }
+    const newOrder = { cart, cliente, fecha: new Date().toLocaleDateString(), total: total.toFixed(2) };
+    saveOrderToCloud(phone, newOrder);
+    if (cloudEnabled) {
+      const crmItems = cartToCrmItems(cart);
+      if (crmItems.length > 0) {
+        const webOrderPayload = {
+          id: "wo_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+          phone,
+          negocio: cliente.negocio || "",
+          encargado: cliente.encargado || "",
+          direccion: cliente.dir || "",
+          pago: cliente.pago || "",
+          items: crmItems,
+          cart_raw: cart,
+          total: parseFloat(total.toFixed(2)),
+          status: "pending",
+          notes: "Enviado sin WhatsApp"
+        };
+        fetch(`${SUPA_URL}/rest/v1/web_orders`, {
+          method: "POST",
+          headers: SUPA_HEADERS,
+          body: JSON.stringify(webOrderPayload)
+        }).catch((e) => console.error("web_orders insert failed:", e));
+      }
+    }
+    setOrderConfirmed(true);
   };
 
   const lookupCustomer = async () => {
@@ -581,12 +618,35 @@ export default function App() {
               </div>
             </div>
 
-            {/* SEND BUTTON */}
-            <button onClick={saveAndSend}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginTop: 20, padding: "16px 28px", background: "#25D366", color: "#fff", borderRadius: 10, fontSize: 18, fontWeight: 700, border: "none", cursor: "pointer", width: "100%", fontFamily: "'DM Sans',sans-serif" }}>
-              💬 Enviar Pedido por WhatsApp
-            </button>
-            <p style={{ textAlign: "center", fontSize: 11, color: "#999", marginTop: 8 }}>Se abre WhatsApp con su pedido completo. Su pedido se guarda para repetir después.</p>
+            {/* SEND BUTTONS */}
+            {orderConfirmed ? (
+              <div style={{ marginTop: 20, padding: 24, background: "#E8F5E9", borderRadius: 12, textAlign: "center" }}>
+                <div style={{ fontSize: 40, marginBottom: 8 }}>✅</div>
+                <h3 style={{ fontSize: 20, fontWeight: 700, color: "#2E7D32", margin: "0 0 8px" }}>¡Pedido recibido!</h3>
+                <p style={{ fontSize: 14, color: "#666", margin: "0 0 16px", lineHeight: 1.5 }}>
+                  José le contactará pronto al <strong>{cliente.tel}</strong> para confirmar su pedido y coordinar la entrega.
+                </p>
+                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+                  <a href="tel:+17073607420" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 20px", background: "#1A1A1A", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>📞 Llamar ahora</a>
+                  <button onClick={() => { setOrderConfirmed(false); setCart({}); setCliente({ negocio: "", encargado: "", tel: "", dir: "", pago: "" }); }}
+                    style={{ padding: "10px 20px", background: "#fff", color: "#666", border: "1px solid #ddd", borderRadius: 8, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Hacer otro pedido</button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
+                  <button onClick={saveAndSend}
+                    style={{ flex: "1 1 200px", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 20px", background: "#25D366", color: "#fff", borderRadius: 10, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+                    💬 Enviar por WhatsApp
+                  </button>
+                  <button onClick={saveWithoutWA}
+                    style={{ flex: "1 1 200px", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "16px 20px", background: "#1A1A1A", color: "#fff", borderRadius: 10, fontSize: 16, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+                    📧 Enviar sin WhatsApp
+                  </button>
+                </div>
+                <p style={{ textAlign: "center", fontSize: 11, color: "#999", marginTop: 8 }}>Con WhatsApp se abre la conversación directo. Sin WhatsApp, José le llama al teléfono que puso arriba.</p>
+              </>
+            )}
           </div>
         </div>
       )}
