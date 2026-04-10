@@ -41,7 +41,7 @@ const TX = {
     btnWA: "Mandar WhatsApp",
     badge1: "✅ Sin pedido mínimo", badge2: "✅ Entrega en la semana", badge3: "✅ Pago al recibir", badge4: "✅ Producto 100% original",
     prodTitle: "Productos disponibles",
-    prodSub: "{t("prodSub")}",
+    prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Desde 1987",
     viewDetail: "Detalle", viewQuick: "Hoja rápida",
     returningBtn: "¿Ya ordenaste antes? Ver mis pedidos",
     directWA: "Ya sé lo que quiero — WhatsApp directo",
@@ -670,7 +670,7 @@ export default function App() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
             <div>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 4px" }}>{t("prodTitle")}</h2>
-              <p style={{ fontSize: 14, color: "#888", margin: 0 }}>Dulces Pigüi — Guadalajara, Jalisco — Desde 1987</p>
+              <p style={{ fontSize: 14, color: "#888", margin: 0 }}>{t("prodSub")}</p>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               <button onClick={() => setVistaCompacta(false)} style={{ padding: "6px 14px", borderRadius: 6, border: "1px solid #ddd", background: !vistaCompacta ? "#1A1A1A" : "#fff", color: !vistaCompacta ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("viewDetail")}</button>
