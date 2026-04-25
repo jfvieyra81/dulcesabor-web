@@ -634,13 +634,10 @@ export default function App() {
 
       {/* === HERO: JOSE + VALUE PROP === */}
       <div style={{ background: "linear-gradient(135deg, #FFF8E1, #fff)", padding: "40px 20px", maxWidth: 800, margin: "0 auto" }}>
-        <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-          <img src={IMG_JOSE} alt="José Flores" style={{ width: 80, height: 80, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", flexShrink: 0, border: "3px solid #D4951A" }} />
-          <div>
-            <div style={{ fontSize: 22, fontWeight: 700 }}>Jose Flores</div>
-            <div style={{ fontSize: 14, color: "#888" }}>{t("heroRole")}</div>
-            <div style={{ fontSize: 13, color: "#D4951A", fontWeight: 600, marginTop: 4 }}>{t("heroExp")}</div>
-          </div>
+        <div style={{ marginBottom: 24 }}>
+          <img src="/dulce-sabor-logo.png" alt="Dulce Sabor LLC — Distribuidora de Dulces Mexicanos" style={{ width: "100%", maxWidth: 280, height: "auto", display: "block", marginBottom: 16 }} />
+          <div style={{ fontSize: 14, color: "#888" }}>{t("heroRole")}</div>
+          <div style={{ fontSize: 13, color: "#D4951A", fontWeight: 600, marginTop: 4 }}>{t("heroExp")}</div>
         </div>
 
         <h1 style={{ fontSize: "clamp(28px, 6vw, 44px)", fontWeight: 700, lineHeight: 1.2, margin: "0 0 8px" }}>
