@@ -17,7 +17,7 @@ const TIER_LABELS = ["1-4 cajas","5-9 cajas","10-19 cajas","20+ cajas"];
 const getTier = (q) => q >= 20 ? 3 : q >= 10 ? 2 : q >= 5 ? 1 : 0;
 
 const P = [
-  { name: "Cachetadas / Slaps", subKey: "subSlaps", pres: "25 bags/case", presEs: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tagKey:"tagBest", tagColor:"#D4951A", sabores:["Tamarindo","Manzana Verde","Mix","DobleX"] },
+  { name: "Cachetadas / Slaps", subKey: "subSlaps", pres: "25 bags/case", presEs: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tagKey:"tagBest", tagColor:"#D4951A", sabores:["Tamarindo","Mango","Manzana Verde","Mix","DobleX"] },
   { name: "Mega Huevón Display", subKey: "subHuevonD", pres: "16 displays/case", presEs: "16 displays/caja", up:["$5.25","$5.00","$4.85","$4.65"], cp:[84, 80, 77.60, 74.40], img: IMG_MEGA_HUEVON_DISPLAY, tagKey:"tagNew", tagColor:"#C41E2A" },
   { name: "Mega Huevón Bolsa", subKey: "subHuevonB", pres: "10 bags/case", presEs: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tagKey:"tagBulk", tagColor:"#7B1FA2" },
   { name: "Flamkiyos", subKey: "subFlamkiyos", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$7.75","$7.35","$7.15","$6.80"], cp:[93, 88.20, 85.80, 81.60], img: IMG_FLAMKIYOS, tagKey:"tagIntense", tagColor:"#E65100" },
