@@ -19,26 +19,27 @@ const getTier = (q) => q >= 20 ? 3 : q >= 10 ? 2 : q >= 5 ? 1 : 0;
 const P = [
   { name: "Cachetadas / Slaps", subKey: "subSlaps", pres: "25 bags/case", presEs: "25 bolsas/caja", up:["$1.60","$1.55","$1.50","$1.40"], cp:[40, 38.75, 37.50, 35], img: IMG_SLAPS, tagKey:"tagBest", tagColor:"#D4951A", sabores:["Tamarindo","Mango","Manzana Verde","Mix","DobleX"] },
   { name: "Mega Huevón Display", subKey: "subHuevonD", pres: "16 displays/case", presEs: "16 displays/caja", up:["$5.25","$5.00","$4.85","$4.65"], cp:[84, 80, 77.60, 74.40], img: IMG_MEGA_HUEVON_DISPLAY, tagKey:"tagNew", tagColor:"#C41E2A" },
-  { name: "Mega Huevón Bolsa", subKey: "subHuevonB", pres: "10 bags/case", presEs: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tagKey:"tagBulk", tagColor:"#7B1FA2" },
+  { name: "Mega Huevón Bolsa", subKey: "subHuevonB", pres: "10 bags/case", presEs: "10 bolsas/caja", up:["$10.50","$10.00","$9.65","$9.25"], cp:[105, 100, 96.50, 92.50], img: IMG_MEGA_HUEVON_BOLSA, tagKey:"tagBulk", tagColor:"#8B6914" },
   { name: "Flamkiyos", subKey: "subFlamkiyos", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$7.75","$7.35","$7.15","$6.80"], cp:[93, 88.20, 85.80, 81.60], img: IMG_FLAMKIYOS, tagKey:"tagIntense", tagColor:"#E65100" },
-  { name: "Mordidilla", subKey: "subMordidilla", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$5.00","$4.75","$4.60","$4.40"], cp:[60, 57, 55.20, 52.80], img: IMG_MORDIDILLA, tagKey:"tagClassic", tagColor:"#2E7D32" },
+  { name: "Mordidilla", subKey: "subMordidilla", pres: "12 bags/case", presEs: "12 bolsas/caja", up:["$5.00","$4.75","$4.60","$4.40"], cp:[60, 57, 55.20, 52.80], img: IMG_MORDIDILLA, tagKey:"tagClassic", tagColor:"#7A1218" },
 ];
 
 const PROX = ["Piguileta Fuego", "Piguileta Cool", "Cache Colors", "Devoralien", "Devora", "Changaleta", "Chilipekas", "Bolas Don Cuco", "Arenitas"];
 
 const TX = {
   es: {
-    headerTitle: "DULCES PIGUI — Distribuidor NorCal",
+    headerTitle: "EL MAESTRO FLORES — Distribuidor Autorizado Dulces Pigüi",
     whereToBuy: "¿Dónde Comprar?",
     heroName: "Jose Flores",
     heroRole: "Distribuidor de Dulces Pigüi en Northern California",
     heroExp: "15 años de experiencia • Entrega personal • Ukiah, CA",
+    heroTagline: "★ Aprobado por el Maestro Flores ★",
     heroH1a: "Dulces auténticos de México,",
     heroH1b: "directo a su negocio.",
     heroDesc: "Le llevo los dulces que su clientela conoce y busca. Sin viajar, sin intermediarios, a precio de distribuidor.",
     btnPrices: "Ver Precios",
     btnWA: "Mandar WhatsApp",
-    badge1: "✅ Sin pedido mínimo", badge2: "✅ Entrega en la semana", badge3: "✅ Pago al recibir", badge4: "✅ Producto 100% original",
+    badge1: "✓ Sin pedido mínimo", badge2: "✓ Entrega en la semana", badge3: "✓ Pago al recibir", badge4: "✓ Producto 100% original",
     prodTitle: "Productos disponibles",
     prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Desde 1987",
     viewDetail: "Detalle", viewQuick: "Hoja rápida",
@@ -78,11 +79,14 @@ const TX = {
     cartEdit: "✏️ Editar Productos",
     cartEmpty: "Vaciar",
     cartComplete: "📋 Completar Pedido",
-    whyTitle: "¿Por qué comprarme a mi?",
+    whyTitle: "¿Por qué comprarme a mí?",
     why1t: "Entrega directa", why1d: "Le llevo el producto a su puerta. Sin viajar a LA, sin perder un día.",
     why2t: "Mejor precio", why2d: "Desde $1.40 por bolsa. Mientras más compra, menos paga.",
     why3t: "Cero riesgo", why3d: "Sin pedido mínimo, sin contrato. Empiece con una caja.",
     whyNote: "Atendemos tiendas, carnicerías y dulcerías en Ukiah, Willits, Santa Rosa, Petaluma, Bay Area, Sacramento y alrededores.",
+    ttTitle: "Sígame en TikTok",
+    ttSub: "Las virales Cachetadas del Maestro Flores — vea por qué todos preguntan por ellas.",
+    ttBtn: "Ver videos en TikTok",
     faqTitle: "Preguntas comunes",
     ctaTitle: "¿Listo para surtir su negocio?",
     ctaSub: "Mándeme un WhatsApp y le mando precios en minutos.",
@@ -121,20 +125,21 @@ const TX = {
     storeDirections: "🗺️ Cómo llegar",
     storeAddMe: "Agrégame al directorio",
     storeHaveStore: "¿Tienes una tienda y vendes Dulces Pigüi?",
-    storeBack: "← DULCES PIGUI — Distribuidor NorCal",
+    storeBack: "← El Maestro Flores",
   },
   en: {
-    headerTitle: "DULCES PIGUI — NorCal Distributor",
+    headerTitle: "EL MAESTRO FLORES — Authorized Dulces Pigüi Distributor",
     whereToBuy: "Where to Buy",
     heroName: "Jose Flores",
     heroRole: "Dulces Pigüi Distributor in Northern California",
     heroExp: "15 years of experience • Personal delivery • Ukiah, CA",
+    heroTagline: "★ Approved by Maestro Flores ★",
     heroH1a: "Authentic Mexican candy,",
     heroH1b: "delivered to your business.",
     heroDesc: "I bring the candy your customers know and love. No traveling, no middlemen, at distributor pricing.",
     btnPrices: "See Prices",
     btnWA: "Send WhatsApp",
-    badge1: "✅ No minimum order", badge2: "✅ Delivery within the week", badge3: "✅ Pay on delivery", badge4: "✅ 100% original product",
+    badge1: "✓ No minimum order", badge2: "✓ Delivery within the week", badge3: "✓ Pay on delivery", badge4: "✓ 100% original product",
     prodTitle: "Available Products",
     prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Since 1987",
     viewDetail: "Detail", viewQuick: "Quick view",
@@ -179,6 +184,9 @@ const TX = {
     why2t: "Best price", why2d: "From $1.40 per bag. The more you buy, the less you pay.",
     why3t: "Zero risk", why3d: "No minimum order, no contract. Start with one case.",
     whyNote: "We serve stores, butcher shops and candy shops in Ukiah, Willits, Santa Rosa, Petaluma, Bay Area, Sacramento and surrounding areas.",
+    ttTitle: "Follow me on TikTok",
+    ttSub: "Maestro Flores' viral Cachetadas — see why everyone asks for them.",
+    ttBtn: "Watch on TikTok",
     faqTitle: "Common Questions",
     ctaTitle: "Ready to stock your business?",
     ctaSub: "Send me a WhatsApp and I\'ll send you prices in minutes.",
@@ -217,7 +225,7 @@ const TX = {
     storeDirections: "🗺️ Directions",
     storeAddMe: "Add me to the directory",
     storeHaveStore: "Do you have a store and sell Dulces Pigüi?",
-    storeBack: "← DULCES PIGUI — NorCal Distributor",
+    storeBack: "← El Maestro Flores",
   }
 };
 
@@ -226,7 +234,7 @@ const FAQ = {
     { q: "¿Hay pedido mínimo?", a: "No. Puede empezar con una sola caja para probar. Sin contrato ni compromiso." },
     { q: "¿Cuánto tarda la entrega?", a: "Dentro de la misma semana para Mendocino, Sonoma, Bay Area y Sacramento." },
     { q: "¿Cómo pago?", a: "Efectivo al recibir, transferencia, o Zelle. Para clientes frecuentes hay crédito." },
-    { q: "¿Son los dulces originales de México?", a: "Si. De fábrica Pigüi en Guadalajara, Jalisco. El mismo fabricante desde 1987." },
+    { q: "¿Son los dulces originales de México?", a: "Sí. De fábrica Pigüi en Guadalajara, Jalisco. El mismo fabricante desde 1987." },
   ],
   en: [
     { q: "Is there a minimum order?", a: "No. You can start with just one case to try. No contract, no commitment." },
@@ -246,7 +254,7 @@ function StoreLocator({ navigate, t }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    document.title = "¿Dónde Comprar? — Dulce Sabor LLC";
+    document.title = "¿Dónde Comprar? — El Maestro Flores";
     if (!cloudEnabled) { setError("Catálogo no disponible en este momento."); return; }
     fetch(`${SUPA_URL}/rest/v1/public_stores?select=*&order=display_name.asc`, { headers: SUPA_HEADERS })
       .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
@@ -279,12 +287,13 @@ function StoreLocator({ navigate, t }) {
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#fff", color: "#1A1A1A", minHeight: "100vh" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
 
       {/* Header */}
       <div style={{ background: "#C41E2A", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
         <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>{t("storeBack")}</a>
-        <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
+        <a href="https://www.tiktok.com/@maestroflores1" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>🎵 TikTok</a>
+          <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
       </div>
 
       {/* Hero */}
@@ -613,7 +622,7 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#fff", color: "#1A1A1A", position: "relative" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
 
       {/* FLOATING WHATSAPP - hidden when cart shows */}
       {items.length === 0 && <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer"
@@ -627,6 +636,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <button onClick={() => setLang(l => l === "es" ? "en" : "es")} style={{ background: "rgba(255,255,255,0.2)", color: "#fff", border: "1px solid rgba(255,255,255,0.4)", borderRadius: 4, padding: "4px 10px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("langSwitch")}</button>
           <a href="/donde-comprar" onClick={(e) => { e.preventDefault(); navigate("/donde-comprar"); }} style={{ color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "underline" }}>{t("whereToBuy")}</a>
+          <a href="https://www.tiktok.com/@maestroflores1" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>🎵 TikTok</a>
           <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none" }}>📱 (707) 360-7420</a>
         </div>
       </div>
@@ -634,14 +644,15 @@ export default function App() {
       {/* === HERO: JOSE + VALUE PROP === */}
       <div style={{ background: "linear-gradient(135deg, #FFF8E1, #fff)", padding: "40px 20px", maxWidth: 800, margin: "0 auto" }}>
         <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-          <img src="/dulce-sabor-logo.png" alt="Dulce Sabor LLC — Distribuidora de Dulces Mexicanos" style={{ width: 180, height: "auto", flexShrink: 0, display: "block" }} />
+          <img src="/dulce-sabor-logo.png" alt="El Maestro Flores — Distribuidor Autorizado de Dulces Pigüi" style={{ width: 180, height: "auto", flexShrink: 0, display: "block" }} />
           <div style={{ flex: "1 1 250px" }}>
             <div style={{ fontSize: 15, color: "#666", lineHeight: 1.4 }}>{t("heroRole")}</div>
             <div style={{ fontSize: 13, color: "#D4951A", fontWeight: 600, marginTop: 6 }}>{t("heroExp")}</div>
+            <div style={{ display: "inline-block", marginTop: 10, padding: "5px 14px", border: "2px solid #D4951A", borderRadius: 999, color: "#C41E2A", fontSize: 12, fontWeight: 700, transform: "rotate(-2deg)", background: "#FFF8E1" }}>{t("heroTagline")}</div>
           </div>
         </div>
 
-        <h1 style={{ fontSize: "clamp(28px, 6vw, 44px)", fontWeight: 700, lineHeight: 1.2, margin: "0 0 8px" }}>
+        <h1 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: "clamp(28px, 6vw, 44px)", fontWeight: 400, lineHeight: 1.2, margin: "0 0 8px" }}>
           {t("heroH1a")}<br /><span style={{ color: "#C41E2A" }}>{t("heroH1b")}</span>
         </h1>
         <p style={{ fontSize: 16, color: "#666", lineHeight: 1.6, margin: "0 0 24px", maxWidth: 500 }}>
@@ -667,7 +678,7 @@ export default function App() {
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
             <div>
-              <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 4px" }}>{t("prodTitle")}</h2>
+              <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 24, fontWeight: 400, margin: "0 0 4px" }}>{t("prodTitle")}</h2>
               <p style={{ fontSize: 14, color: "#888", margin: 0 }}>{t("prodSub")}</p>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
@@ -678,7 +689,7 @@ export default function App() {
 
           <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
             <button onClick={() => setShowLookup(true)}
-              style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#E8F5E9", border: "2px solid #2E7D32", borderRadius: 8, fontSize: 14, fontWeight: 700, color: "#2E7D32", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+              style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#FFF8E1", border: "2px solid #8B6914", borderRadius: 8, fontSize: 14, fontWeight: 700, color: "#8B6914", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
               {t("returningBtn")}
             </button>
             <a href={items.length > 0 ? ("https://wa.me/17073607420?text=" + orderMsg()) : "https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20informaci%C3%B3n%20de%20precios"} target="_blank" rel="noopener noreferrer"
@@ -694,7 +705,7 @@ export default function App() {
                   <img src={p.img} alt={p.name} style={{ width: 40, height: 55, objectFit: "contain", borderRadius: 4, flexShrink: 0 }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</div>
-                    <div style={{ fontSize: 12, color: "#888" }}>{(() => { const ti = getTier(getQtyForProduct(i)); return "$"+p.cp[ti].toFixed(2); })()} {t("perCase")} — <span style={{ color: "#2E7D32" }}>+${Math.round(p.cp[getTier(getQtyForProduct(i))]*0.6)} {t("profit")}</span></div>
+                    <div style={{ fontSize: 12, color: "#888" }}>{(() => { const ti = getTier(getQtyForProduct(i)); return "$"+p.cp[ti].toFixed(2); })()} {t("perCase")} — <span style={{ color: "#8B6914" }}>+${Math.round(p.cp[getTier(getQtyForProduct(i))]*0.6)} {t("profit")}</span></div>
                   </div>
                   {p.sabores ? (
                     <div style={{ display: "flex", flexDirection: "column", gap: 4, flexShrink: 0 }}>
@@ -732,21 +743,21 @@ export default function App() {
                     <h3 style={{ fontSize: 20, fontWeight: 700, margin: "6px 0 4px" }}>{p.name}</h3>
                     <p style={{ fontSize: 13, color: "#888", margin: "0 0 8px" }}>{t(p.subKey)}</p>
                     {(() => { const totalQ = getQtyForProduct(i); const ti = totalQ > 0 ? getTier(totalQ) : 0; const cp = p.cp[ti]; const gan = Math.round(cp*0.6); const pct = Math.round((gan/cp)*100); return (
-                      <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", background: "#E8F5E9", borderRadius: 6, marginBottom: 12, fontSize: 13, flexWrap: "wrap" }}>
+                      <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", background: "#FFF8E1", borderRadius: 6, marginBottom: 12, fontSize: 13, flexWrap: "wrap" }}>
                         <strong>${cp.toFixed(2)} {t("perCase")}</strong>
-                        <span style={{ color: "#2E7D32", fontWeight: 700 }}>+ ${gan} {t("profit")} ({pct}%)</span>
+                        <span style={{ color: "#8B6914", fontWeight: 700 }}>+ ${gan} {t("profit")} ({pct}%)</span>
                         {totalQ >= 5 && <span style={{ fontSize: 10, color: "#D4951A", fontWeight: 600 }}>🎉 Tier {t("tierLabels")[ti]}</span>}
                       </div>
                     );})()}
                     {(() => { const totalQ = getQtyForProduct(i); const activeTier = totalQ > 0 ? getTier(totalQ) : -1; return (
                       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6, marginBottom: 12 }}>
                         {t("tierLabels").map((label, j) => (
-                          <div key={j} style={{ textAlign: "center", padding: "8px 4px", borderRadius: 6, background: activeTier === j ? "#E8F5E9" : j === 3 ? "#FFF3E0" : "#F9F9F7", border: activeTier === j ? "2px solid #2E7D32" : j === 3 ? "2px solid #D4951A" : "1px solid #eee", transition: "all 0.3s" }}>
-                            <div style={{ fontSize: 10, color: activeTier === j ? "#2E7D32" : "#888" }}>{label}</div>
+                          <div key={j} style={{ textAlign: "center", padding: "8px 4px", borderRadius: 6, background: activeTier === j ? "#FFF8E1" : j === 3 ? "#FFF3E0" : "#F9F9F7", border: activeTier === j ? "2px solid #8B6914" : j === 3 ? "2px solid #D4951A" : "1px solid #eee", transition: "all 0.3s" }}>
+                            <div style={{ fontSize: 10, color: activeTier === j ? "#8B6914" : "#888" }}>{label}</div>
                             <div style={{ fontSize: 11, color: "#aaa" }}>{p.up[j]}/u</div>
-                            <div style={{ fontSize: 16, fontWeight: 700, color: activeTier === j ? "#2E7D32" : j === 3 ? "#D4951A" : "#1A1A1A" }}>${p.cp[j].toFixed(2)}</div>
-                            <div style={{ fontSize: 9, color: activeTier === j ? "#2E7D32" : "#aaa" }}>{t("perCase")}</div>
-                            {activeTier === j && <div style={{ fontSize: 9, fontWeight: 700, color: "#2E7D32", marginTop: 2 }}>{t("yourPrice")}</div>}
+                            <div style={{ fontSize: 16, fontWeight: 700, color: activeTier === j ? "#8B6914" : j === 3 ? "#D4951A" : "#1A1A1A" }}>${p.cp[j].toFixed(2)}</div>
+                            <div style={{ fontSize: 9, color: activeTier === j ? "#8B6914" : "#aaa" }}>{t("perCase")}</div>
+                            {activeTier === j && <div style={{ fontSize: 9, fontWeight: 700, color: "#8B6914", marginTop: 2 }}>{t("yourPrice")}</div>}
                           </div>
                         ))}
                       </div>
@@ -773,7 +784,7 @@ export default function App() {
                           <button key={q} onClick={() => setQty(key, q)} style={{ padding: "6px 14px", borderRadius: 6, border: cart[key] === q ? "2px solid #C41E2A" : "1px solid #ddd", background: cart[key] === q ? "#FFF3F3" : "#fff", cursor: "pointer", fontSize: 14, fontWeight: 700, color: cart[key] === q ? "#C41E2A" : "#666", fontFamily: "'DM Sans',sans-serif" }}>{q}</button>
                         );})}
                         <input type="number" min="0" max="999" value={cart[String(i)] || ""} onChange={e => setQty(String(i), Math.max(0, parseInt(e.target.value) || 0))} placeholder="Otro"
-                          style={{ width: 60, padding: "6px 8px", borderRadius: 6, border: "1px solid #ddd", fontSize: 14, textAlign: "center", fontFamily: "'DM Sans',sans-serif" }} />
+                          style={{ width: 74, padding: "6px 8px", borderRadius: 6, border: "1px solid #ddd", fontSize: 14, textAlign: "center", fontFamily: "'DM Sans',sans-serif" }} />
                         {cart[String(i)] && <button onClick={() => setQty(String(i), 0)} style={{ padding: "4px 8px", borderRadius: 4, border: "none", background: "#f5f5f5", cursor: "pointer", fontSize: 11, color: "#999" }}>✕ Quitar</button>}
                       </div>
                     )}
@@ -802,12 +813,12 @@ export default function App() {
               {items.map(([key, q]) => { const pi = getPI(key); const cp = getCasePrice(pi); const gan = Math.round(cp*0.6); return (
                 <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 0", borderBottom: "1px solid #eee", fontSize: 13 }}>
                   <span style={{ flex: 1 }}>{getLabel(key)} <span style={{ color: "#888" }}>×{q} caja{q>1?"s":""}</span></span>
-                  <span style={{ fontWeight: 700 }}>${(cp*q).toFixed(2)} <span style={{ color: "#2E7D32", fontWeight: 600 }}>+${gan*q} ({Math.round((gan/cp)*100)}%)</span></span>
+                  <span style={{ fontWeight: 700 }}>${(cp*q).toFixed(2)} <span style={{ color: "#8B6914", fontWeight: 600 }}>+${gan*q} ({Math.round((gan/cp)*100)}%)</span></span>
                 </div>
               );})}
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10, paddingTop: 10, borderTop: "2px solid #1A1A1A", fontSize: 16, fontWeight: 700 }}>
                 <span>{t("total")}</span>
-                <span>${total.toFixed(2)} <span style={{ color: "#2E7D32" }}>+${totalGanancia.toFixed(2)} {t("profit")}</span></span>
+                <span>${total.toFixed(2)} <span style={{ color: "#8B6914" }}>+${totalGanancia.toFixed(2)} {t("profit")}</span></span>
               </div>
             </div>
 
@@ -848,9 +859,9 @@ export default function App() {
 
             {/* SEND BUTTONS */}
             {orderConfirmed ? (
-              <div style={{ marginTop: 20, padding: 24, background: "#E8F5E9", borderRadius: 12, textAlign: "center" }}>
+              <div style={{ marginTop: 20, padding: 24, background: "#FFF8E1", borderRadius: 12, textAlign: "center" }}>
                 <div style={{ fontSize: 40, marginBottom: 8 }}>✅</div>
-                <h3 style={{ fontSize: 20, fontWeight: 700, color: "#2E7D32", margin: "0 0 8px" }}>{t("confirmTitle")}</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 700, color: "#8B6914", margin: "0 0 8px" }}>{t("confirmTitle")}</h3>
                 <p style={{ fontSize: 14, color: "#666", margin: "0 0 16px", lineHeight: 1.5 }}>
                   {t("confirmMsg")} <strong>{cliente.tel}</strong> {t("confirmMsg2")}
                 </p>
@@ -907,7 +918,7 @@ export default function App() {
             <div onClick={() => setCartExpanded(!cartExpanded)} style={{ color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
               <span style={{ fontSize: 14, color: "#D4951A", transition: "transform 0.3s", transform: cartExpanded ? "rotate(180deg)" : "rotate(0)" }}>▲</span>
               <strong style={{ fontSize: 22, color: "#fff", lineHeight: 1 }}>${total.toFixed(2)}</strong>
-              <span style={{ color: "#4ADE80", fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} {t("profit")}</span>
+              <span style={{ color: "#FFD54F", fontSize: 13, fontWeight: 700 }}>+${totalGanancia.toFixed(2)} {t("profit")}</span>
             </div>
             <div style={{ display: "flex", gap: 10 }}>
               <button onClick={() => { setCart({}); setCartExpanded(false); }} style={{ flex: "0 0 auto", padding: "14px 20px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("cartEmpty")}</button>
@@ -920,12 +931,12 @@ export default function App() {
 
       {/* === WHY US (COMPACT) === */}
       <div style={{ padding: "40px 20px", maxWidth: 800, margin: "0 auto" }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>{t("whyTitle")}</h2>
+        <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 20, fontWeight: 400, margin: "0 0 20px", textAlign: "center" }}>{t("whyTitle")}</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
           {[
             { e: "🚚", t: t("why1t"), d: t("why1d") },
             { e: "💰", t: t("why2t"), d: t("why2d") },
-            { e: "✅", t: t("why3t"), d: t("why3d") },
+            { e: "🛡️", t: t("why3t"), d: t("why3d") },
           ].map((b, i) => (
             <div key={i} style={{ padding: 20, background: "#F9F9F7", borderRadius: 10, textAlign: "center" }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{b.e}</div>
@@ -939,10 +950,17 @@ export default function App() {
         </p>
       </div>
 
+      {/* === TIKTOK === */}
+      <div style={{ background: "#1A1A1A", padding: "44px 20px", textAlign: "center" }}>
+        <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 22, fontWeight: 400, color: "#fff", margin: "0 0 8px" }}>{t("ttTitle")}</h2>
+        <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", margin: "0 0 20px" }}>{t("ttSub")}</p>
+        <a href="https://www.tiktok.com/@maestroflores1" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#C41E2A", color: "#fff", padding: "12px 24px", borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: "none", border: "2px solid #D4951A" }}>🎵 {t("ttBtn")} — @maestroflores1</a>
+      </div>
+
       {/* === FAQ (SHORT) === */}
       <div style={{ background: "#F9F9F7", padding: "40px 20px" }}>
         <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 20px", textAlign: "center" }}>{t("faqTitle")}</h2>
+          <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 20, fontWeight: 400, margin: "0 0 20px", textAlign: "center" }}>{t("faqTitle")}</h2>
           {(FAQ[lang] || FAQ.es).map((f, i) => (
             <div key={i} style={{ borderBottom: "1px solid #eee" }}>
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: "100%", padding: "16px 0", background: "none", border: "none", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'DM Sans', sans-serif", textAlign: "left" }}>
@@ -959,7 +977,7 @@ export default function App() {
 
       {/* === BIG CTA === */}
       <div style={{ background: "#C41E2A", padding: "40px 20px", textAlign: "center" }}>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: "0 0 8px" }}>{t("ctaTitle")}</h2>
+        <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 24, fontWeight: 400, color: "#fff", margin: "0 0 8px" }}>{t("ctaTitle")}</h2>
         <p style={{ fontSize: 16, color: "rgba(255,255,255,0.8)", margin: "0 0 24px" }}>{t("ctaSub")}</p>
         <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20información%20de%20precios" target="_blank" rel="noopener noreferrer"
           style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#C41E2A", padding: "16px 36px", borderRadius: 8, fontSize: 20, fontWeight: 700, textDecoration: "none" }}>💬 (707) 360-7420</a>
@@ -1010,7 +1028,7 @@ export default function App() {
 
             {lookupResults?.orders && (
               <>
-                <div style={{ padding: "12px 16px", background: "#E8F5E9", borderRadius: 8, marginBottom: 16, fontSize: 13, color: "#2E7D32", fontWeight: 600 }}>
+                <div style={{ padding: "12px 16px", background: "#FFF8E1", borderRadius: 8, marginBottom: 16, fontSize: 13, color: "#8B6914", fontWeight: 600 }}>
                   ✓ Encontramos {lookupResults.orders.length} pedido{lookupResults.orders.length > 1 ? "s" : ""}
                   {lookupResults.orders[0]?.cliente?.negocio ? ` de ${lookupResults.orders[0].cliente.negocio}` : ""}
                 </div>
