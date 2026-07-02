@@ -681,7 +681,7 @@ export default function App() {
               style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#E8F5E9", border: "2px solid #2E7D32", borderRadius: 8, fontSize: 14, fontWeight: 700, color: "#2E7D32", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
               {t("returningBtn")}
             </button>
-            <a href="https://wa.me/17073607420?text=Hola%20José%2C%20quiero%20repetir%20mi%20pedido%20anterior" target="_blank" rel="noopener noreferrer"
+            <a href={items.length > 0 ? ("https://wa.me/17073607420?text=" + orderMsg()) : "https://wa.me/17073607420?text=Hola%20Jose%2C%20quiero%20informaci%C3%B3n%20de%20precios"} target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", background: "#fff", border: "2px dashed #25D366", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600, color: "#25D366" }}>
               {t("directWA")}
             </a>
