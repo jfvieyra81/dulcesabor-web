@@ -954,6 +954,11 @@ export default function App() {
       <div style={{ background: "#1A1A1A", padding: "44px 20px", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'Luckiest Guy', 'DM Sans', sans-serif", fontSize: 22, fontWeight: 400, color: "#fff", margin: "0 0 8px" }}>{t("ttTitle")}</h2>
         <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", margin: "0 0 20px" }}>{t("ttSub")}</p>
+        <div style={{ display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap", margin: "0 0 24px" }}>
+          {["7632571738756222238", "7646589773980699934", "7637697541013818654"].map(id => (
+            <iframe key={id} src={"https://www.tiktok.com/embed/v2/" + id} loading="lazy" title="TikTok del Maestro Flores" allow="encrypted-media; fullscreen" style={{ width: 325, height: 580, border: "none", borderRadius: 12, background: "#000", maxWidth: "90vw" }} />
+          ))}
+        </div>
         <a href="https://www.tiktok.com/@maestroflores1" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#C41E2A", color: "#fff", padding: "12px 24px", borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: "none", border: "2px solid #D4951A" }}>🎵 {t("ttBtn")} — @maestroflores1</a>
       </div>
 
