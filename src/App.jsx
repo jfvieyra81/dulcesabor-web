@@ -1,6 +1,7 @@
 // i18n v1 — 2026-04-10
 import { useState, useEffect, useRef } from "react";
 import { SUPABASE_URL, SUPABASE_KEY } from "./config.js";
+import { supabase, ensureSession } from "./supabaseClient.js";
 const APP_VERSION = "1.1.0";
 const SUPA_URL = SUPABASE_URL !== "YOUR_PROJECT_URL_HERE" ? SUPABASE_URL : null;
 const SUPA_KEY = SUPABASE_KEY !== "YOUR_ANON_KEY_HERE" ? SUPABASE_KEY : null;
@@ -465,20 +466,18 @@ export default function App() {
     // Push to cloud if enabled
     if (!cloudEnabled) return;
     try {
-      // Get existing orders for this phone
-      const getResp = await fetch(`${SUPA_URL}/rest/v1/customer_orders?phone=eq.${phone}&select=data`, {
-        headers: { "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}` }
-      });
-      const existing = await getResp.json();
-      const currentOrders = existing[0]?.data || [];
+      const session = await ensureSession();
+
+      // Claim any existing row for this phone (from this or a prior device) and get its data
+      const { data: claimed } = await supabase.rpc("claim_orders", { p_phone: phone });
+      const currentOrders = claimed || [];
       const updated = [newOrder, ...currentOrders].slice(0, 5);
 
-      // Upsert
-      await fetch(`${SUPA_URL}/rest/v1/customer_orders`, {
-        method: "POST",
-        headers: SUPA_HEADERS,
-        body: JSON.stringify({ phone, data: updated, updated_at: new Date().toISOString() })
-      });
+      // Upsert, scoped to our own session (required by RLS)
+      await supabase.from("customer_orders").upsert(
+        { phone, data: updated, owner_id: session.user.id, updated_at: new Date().toISOString() },
+        { onConflict: "phone" }
+      );
     } catch(e) { console.error("Cloud save failed:", e); }
   };
 
@@ -555,14 +554,12 @@ export default function App() {
     setLookupLoading(true);
     let orders = null;
 
-    // Try cloud first
+    // Try cloud first — claiming transfers the row (if any) to this session
     if (cloudEnabled) {
       try {
-        const resp = await fetch(`${SUPA_URL}/rest/v1/customer_orders?phone=eq.${phone}&select=data`, {
-          headers: { "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}` }
-        });
-        const json = await resp.json();
-        if (json[0]?.data?.length > 0) orders = json[0].data;
+        await ensureSession();
+        const { data: claimed } = await supabase.rpc("claim_orders", { p_phone: phone });
+        if (claimed?.length > 0) orders = claimed;
       } catch(e) { console.error("Cloud lookup failed:", e); }
     }
 
