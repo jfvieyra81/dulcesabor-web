@@ -507,7 +507,7 @@ export default function App() {
           };
           fetch(`${SUPA_URL}/rest/v1/web_orders`, {
             method: "POST",
-            headers: SUPA_HEADERS,
+            headers: { ...SUPA_HEADERS, "Prefer": "return=minimal" },
             body: JSON.stringify(webOrderPayload)
           }).catch((e) => console.error("web_orders insert failed:", e));
         }
@@ -539,7 +539,7 @@ export default function App() {
         };
         fetch(`${SUPA_URL}/rest/v1/web_orders`, {
           method: "POST",
-          headers: SUPA_HEADERS,
+          headers: { ...SUPA_HEADERS, "Prefer": "return=minimal" },
           body: JSON.stringify(webOrderPayload)
         }).catch((e) => console.error("web_orders insert failed:", e));
       }
