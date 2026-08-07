@@ -369,6 +369,48 @@ function StoreLocator({ navigate, t }) {
   );
 }
 
+function LegalPage({ type, navigate }) {
+  const isPrivacy = type === "privacy";
+  const title = isPrivacy ? "Política de Privacidad" : "Términos de Uso";
+  const updated = "6 de agosto de 2026";
+  const sectionStyle = { marginBottom: 28 };
+  const h2Style = { fontSize: 21, color: "#C41E2A", margin: "0 0 10px" };
+  const pStyle = { fontSize: 16, lineHeight: 1.65, margin: "0 0 10px", color: "#333" };
+
+  return (
+    <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#fff", color: "#1A1A1A", minHeight: "100vh" }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet" />
+      <header style={{ background: "#C41E2A", padding: "12px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} style={{ color: "#fff", textDecoration: "none", fontWeight: 700 }}>← El Maestro Flores</a>
+        <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", textDecoration: "none", fontWeight: 700 }}>Contacto: (707) 360-7420</a>
+      </header>
+      <main style={{ maxWidth: 820, margin: "0 auto", padding: "48px 20px 72px" }}>
+        <h1 style={{ fontSize: "clamp(30px, 6vw, 42px)", margin: "0 0 8px", color: "#1A1A1A" }}>{title}</h1>
+        <p style={{ ...pStyle, color: "#666" }}>Dulce Sabor LLC · Última actualización: {updated}</p>
+        {isPrivacy ? <>
+          <section style={sectionStyle}><h2 style={h2Style}>Información que recopilamos</h2><p style={pStyle}>Cuando solicita un pedido, podemos recopilar el nombre de su negocio, nombre de contacto, teléfono, dirección de entrega, forma de pago elegida y productos solicitados. También podemos recibir la información que usted envía voluntariamente por WhatsApp.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Cómo usamos la información</h2><p style={pStyle}>Usamos esta información para recibir, confirmar y entregar pedidos; comunicarnos sobre su pedido; mantener historial de pedidos para clientes que regresan; y operar y mejorar nuestro servicio.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Proveedores de servicio</h2><p style={pStyle}>El sitio usa Supabase para almacenar información operativa de pedidos. Si usted elige enviar su pedido por WhatsApp, el mensaje se procesa conforme a las políticas de WhatsApp. No vendemos información personal.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Retención y seguridad</h2><p style={pStyle}>Conservamos la información solo mientras sea necesaria para operar pedidos, atender clientes y cumplir obligaciones aplicables. Aplicamos medidas razonables para proteger la información, aunque ningún sistema en internet es completamente seguro.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Sus opciones y contacto</h2><p style={pStyle}>Puede solicitar acceso, corrección o eliminación de su información, sujeto a las obligaciones legales aplicables. Para hacerlo, contáctenos por WhatsApp al <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#C41E2A", fontWeight: 700 }}>(707) 360-7420</a>.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Cambios a esta política</h2><p style={pStyle}>Podemos actualizar esta política cuando cambien nuestras prácticas. Publicaremos la versión vigente en esta página con su fecha de actualización.</p></section>
+        </> : <>
+          <section style={sectionStyle}><h2 style={h2Style}>Uso del sitio</h2><p style={pStyle}>Este sitio ofrece información sobre productos y permite solicitar pedidos a Dulce Sabor LLC. Usted acepta usarlo de manera lícita y proporcionar datos de pedido completos y correctos.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Pedidos, precios y disponibilidad</h2><p style={pStyle}>Una solicitud enviada desde el sitio no constituye una aceptación final del pedido. Confirmaremos disponibilidad, precio, entrega y forma de pago directamente con usted antes de completar la venta.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Propiedad intelectual</h2><p style={pStyle}>El contenido, marcas, imágenes y materiales de este sitio pertenecen a sus respectivos titulares y no pueden reutilizarse sin autorización.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Enlaces y servicios externos</h2><p style={pStyle}>El sitio puede enlazar a TikTok, WhatsApp, Google Maps u otros servicios de terceros. Su uso se rige por los términos y políticas de esos servicios.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Contacto</h2><p style={pStyle}>Para preguntas sobre estos términos o sobre un pedido, contáctenos por WhatsApp al <a href="https://wa.me/17073607420" target="_blank" rel="noopener noreferrer" style={{ color: "#C41E2A", fontWeight: 700 }}>(707) 360-7420</a>.</p></section>
+          <section style={sectionStyle}><h2 style={h2Style}>Cambios</h2><p style={pStyle}>Podemos actualizar estos términos publicando una nueva versión en esta página.</p></section>
+        </>}
+      </main>
+      <footer style={{ borderTop: "1px solid #eee", padding: "22px 20px", textAlign: "center", fontSize: 14, color: "#666" }}>
+        <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate("/privacy"); }} style={{ color: "#C41E2A", marginRight: 18 }}>Política de Privacidad</a>
+        <a href="/terms" onClick={(e) => { e.preventDefault(); navigate("/terms"); }} style={{ color: "#C41E2A" }}>Términos de Uso</a>
+      </footer>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState("es");
   const t = (k) => (TX[lang] || TX.es)[k] || k;
@@ -615,6 +657,12 @@ export default function App() {
 
   if (path === "/donde-comprar" || path === "/donde-comprar/") {
     return <StoreLocator navigate={navigate} t={t} />;
+  }
+  if (path === "/privacy" || path === "/privacy/") {
+    return <LegalPage type="privacy" navigate={navigate} />;
+  }
+  if (path === "/terms" || path === "/terms/") {
+    return <LegalPage type="terms" navigate={navigate} />;
   }
 
   return (
@@ -1077,6 +1125,10 @@ export default function App() {
       <div style={{ background: "#1A1A1A", padding: "24px 20px", textAlign: "center" }}>
         <div style={{ fontSize: 14, color: "#D4951A", fontWeight: 600, marginBottom: 4 }}>{t("footerName")}</div>
         <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>{t("footerSub")}</div>
+        <div style={{ marginTop: 12, fontSize: 12 }}>
+          <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate("/privacy"); }} style={{ color: "rgba(255,255,255,0.78)", marginRight: 16 }}>Política de Privacidad</a>
+          <a href="/terms" onClick={(e) => { e.preventDefault(); navigate("/terms"); }} style={{ color: "rgba(255,255,255,0.78)" }}>Términos de Uso</a>
+        </div>
       </div>
     </div>
   );
