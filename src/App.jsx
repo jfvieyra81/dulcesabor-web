@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { SUPABASE_URL, SUPABASE_KEY } from "./config.js";
 import { supabase, ensureSession } from "./supabaseClient.js";
-const APP_VERSION = "1.2.1";
+const APP_VERSION = "1.2.2";
 const SUPA_URL = SUPABASE_URL !== "YOUR_PROJECT_URL_HERE" ? SUPABASE_URL : null;
 const SUPA_KEY = SUPABASE_KEY !== "YOUR_ANON_KEY_HERE" ? SUPABASE_KEY : null;
 const SUPA_HEADERS = { "Content-Type": "application/json", "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}`, "Prefer": "return=representation,resolution=merge-duplicates" };
@@ -1142,7 +1142,11 @@ export default function App() {
                             </div>
                           );
                         })}
-                        {orderItems.length > 4 && <div style={{ fontSize: 12, color: "#999", fontStyle: "italic" }}>+ {orderItems.length - 4} {t(orderItems.length - 4 > 1 ? "products" : "product")} {t("more")}</div>}
+                        {orderItems.length > 4 && (() => {
+                          const extraCount = orderItems.length - 4;
+                          const word = t(extraCount > 1 ? "products" : "product");
+                          return <div style={{ fontSize: 12, color: "#999", fontStyle: "italic" }}>{lang === "es" ? `+ ${extraCount} ${word} ${t("more")}` : `+ ${extraCount} ${t("more")} ${word}`}</div>;
+                        })()}
                       </div>
                       <button onClick={() => reorderFromHistory(order)}
                         style={{ width: "100%", padding: "10px 16px", background: isLatest ? "#C41E2A" : "#1A1A1A", color: "#fff", border: "none", borderRadius: 6, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
