@@ -1,4 +1,4 @@
-const CACHE = 'dulcesabor-v10';
+const CACHE = 'dulcesabor-v11';
 
 self.addEventListener('install', e => {
   self.skipWaiting();

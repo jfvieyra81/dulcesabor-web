@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { SUPABASE_URL, SUPABASE_KEY } from "./config.js";
 import { supabase, ensureSession } from "./supabaseClient.js";
-const APP_VERSION = "1.1.0";
+const APP_VERSION = "1.2.0";
 const SUPA_URL = SUPABASE_URL !== "YOUR_PROJECT_URL_HERE" ? SUPABASE_URL : null;
 const SUPA_KEY = SUPABASE_KEY !== "YOUR_ANON_KEY_HERE" ? SUPABASE_KEY : null;
 const SUPA_HEADERS = { "Content-Type": "application/json", "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}`, "Prefer": "return=representation,resolution=merge-duplicates" };
@@ -35,16 +35,21 @@ const TX = {
     heroRole: "Distribuidor de Dulces Pigüi en Northern California",
     heroExp: "15 años de experiencia • Entrega personal • Ukiah, CA",
     heroTagline: "★ Aprobado por el Maestro Flores ★",
-    heroH1a: "Dulces auténticos de México,",
-    heroH1b: "directo a su negocio.",
-    heroDesc: "Le llevo los dulces que su clientela conoce y busca. Sin viajar, sin intermediarios, a precio de distribuidor.",
-    btnPrices: "Ver Precios",
-    btnWA: "Mandar WhatsApp",
+    heroH1a: "Haz tu pedido de dulces mexicanos",
+    heroH1b: "en minutos.",
+    heroDesc: "Para tiendas y negocios. Repite tu pedido, ajusta cantidades y Dulce Sabor confirma inventario y ruta contigo.",
+    heroPrimaryBtn: "🔄 Ya soy cliente — repetir mi pedido",
+    heroPrimarySupport: "Usa el teléfono de tu pedido anterior.",
+    heroSecondaryBtn: "Ver catálogo para mi primer pedido",
+    heroTrustLink: "¿Prefieres hablar con José? Escríbenos por WhatsApp.",
+    howStep1: "Armas o repites tu pedido",
+    howStep2: "Confirmamos inventario, precio y ruta",
+    howStep3: "Coordinamos la entrega contigo",
     badge1: "✓ Sin pedido mínimo", badge2: "✓ Entrega en la semana", badge3: "✓ Pago al recibir", badge4: "✓ Producto 100% original",
     prodTitle: "Productos disponibles",
     prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Desde 1987",
     viewDetail: "Detalle", viewQuick: "Hoja rápida",
-    returningBtn: "¿Ya ordenaste antes? Ver mis pedidos",
+    returningBtn: "¿Ya eres cliente? Repite un pedido anterior",
     directWA: "Ya sé lo que quiero — WhatsApp directo",
     chooseFlavor: "Escoja sabor y cajas:",
     cases: "Cajas:", remove: "✕ Quitar",
@@ -92,16 +97,19 @@ const TX = {
     ctaTitle: "¿Listo para surtir su negocio?",
     ctaSub: "Mándeme un WhatsApp y le mando precios en minutos.",
     ctaNote: "Le contesto en menos de 2 horas • Lunes a sabado",
-    lookupTitle: "🔄 Clientes que regresan",
-    lookupDesc: "Ingrese el número de teléfono que usó en su pedido anterior para ver su historial.",
+    lookupTitle: "Repite tu último pedido",
+    lookupDesc: "Escribe el teléfono que usaste anteriormente. Podrás ver tus pedidos y ajustar cantidades antes de enviarlo.",
+    lookupInvalidPhone: "Escribe un número válido de al menos 7 dígitos",
     lookupBtn: "Buscar mis pedidos",
     lookupSearching: "Buscando...",
     lookupNotFound: "No encontramos pedidos con ese número. Puede hacer su primer pedido abajo.",
     lookupFound: "Encontramos",
     lookupOrder: "pedido",
     lookupOrders: "pedidos",
+    lookupFrom: " de ",
     lookupLatest: "MÁS RECIENTE",
-    lookupReorder: "🔄 Ordenar igual",
+    lookupReorder: "Repetir este pedido",
+    lookupReorderNote: "Podrás ajustar productos y cantidades antes de enviarlo.",
     lookupTryAgain: "Intentar de nuevo",
     lookupOtherNum: "Buscar otro número",
     footerName: "Jose Flores — Dulce Sabor LLC",
@@ -135,16 +143,21 @@ const TX = {
     heroRole: "Dulces Pigüi Distributor in Northern California",
     heroExp: "15 years of experience • Personal delivery • Ukiah, CA",
     heroTagline: "★ Approved by Maestro Flores ★",
-    heroH1a: "Authentic Mexican candy,",
-    heroH1b: "delivered to your business.",
-    heroDesc: "I bring the candy your customers know and love. No traveling, no middlemen, at distributor pricing.",
-    btnPrices: "See Prices",
-    btnWA: "Send WhatsApp",
+    heroH1a: "Order Mexican candy for your business",
+    heroH1b: "in minutes.",
+    heroDesc: "For stores and businesses. Repeat your order, adjust quantities, and Dulce Sabor will confirm inventory and delivery route with you.",
+    heroPrimaryBtn: "🔄 I'm a returning customer — repeat my order",
+    heroPrimarySupport: "Use the phone number from your previous order.",
+    heroSecondaryBtn: "Browse catalog for my first order",
+    heroTrustLink: "Prefer to talk with José? Message us on WhatsApp.",
+    howStep1: "Build or repeat your order",
+    howStep2: "We confirm inventory, price, and route",
+    howStep3: "We coordinate delivery with you",
     badge1: "✓ No minimum order", badge2: "✓ Delivery within the week", badge3: "✓ Pay on delivery", badge4: "✓ 100% original product",
     prodTitle: "Available Products",
     prodSub: "Dulces Pigüi — Guadalajara, Jalisco — Since 1987",
     viewDetail: "Detail", viewQuick: "Quick view",
-    returningBtn: "Ordered before? View my orders",
+    returningBtn: "Returning customer? Repeat a previous order",
     directWA: "I know what I want — Direct WhatsApp",
     chooseFlavor: "Choose flavor and cases:",
     cases: "Cases:", remove: "✕ Remove",
@@ -192,16 +205,19 @@ const TX = {
     ctaTitle: "Ready to stock your business?",
     ctaSub: "Send me a WhatsApp and I\'ll send you prices in minutes.",
     ctaNote: "I respond within 2 hours • Monday to Saturday",
-    lookupTitle: "🔄 Returning customers",
-    lookupDesc: "Enter the phone number you used on your previous order to see your history.",
+    lookupTitle: "Repeat your last order",
+    lookupDesc: "Enter the phone number you used before. You'll be able to see your orders and adjust quantities before sending it.",
+    lookupInvalidPhone: "Enter a valid number with at least 7 digits",
     lookupBtn: "Search my orders",
     lookupSearching: "Searching...",
     lookupNotFound: "We didn\'t find orders with that number. You can place your first order below.",
     lookupFound: "We found",
     lookupOrder: "order",
     lookupOrders: "orders",
+    lookupFrom: " from ",
     lookupLatest: "MOST RECENT",
-    lookupReorder: "🔄 Order again",
+    lookupReorder: "Repeat this order",
+    lookupReorderNote: "You can adjust products and quantities before sending it.",
     lookupTryAgain: "Try again",
     lookupOtherNum: "Search another number",
     footerName: "Jose Flores — Dulce Sabor LLC",
@@ -591,7 +607,7 @@ export default function App() {
 
   const lookupCustomer = async () => {
     const phone = normalizePhone(lookupPhone);
-    if (phone.length < 7) { setLookupResults({ error: "Ingrese un número válido de al menos 7 dígitos" }); return; }
+    if (phone.length < 7) { setLookupResults({ error: t("lookupInvalidPhone") }); return; }
 
     setLookupLoading(true);
     let orders = null;
@@ -616,7 +632,7 @@ export default function App() {
 
     setLookupLoading(false);
     if (!orders || orders.length === 0) {
-      setLookupResults({ error: "No encontramos pedidos con ese número. Puede hacer su primer pedido abajo." });
+      setLookupResults({ error: t("lookupNotFound") });
     } else {
       setLookupResults({ orders, phone });
     }
@@ -703,14 +719,36 @@ export default function App() {
         <p style={{ fontSize: 16, color: "#666", lineHeight: 1.6, margin: "0 0 24px", maxWidth: 500 }}>
           {t("heroDesc")}
         </p>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <button onClick={() => go("productos")} style={{ background: "#C41E2A", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>{t("btnPrices")}</button>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 14, maxWidth: 420 }}>
+          <div style={{ width: "100%" }}>
+            <button onClick={() => setShowLookup(true)}
+              style={{ width: "100%", background: "#C41E2A", color: "#fff", border: "none", padding: "16px 24px", borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", boxShadow: "0 4px 14px rgba(196,30,42,0.28)" }}>
+              {t("heroPrimaryBtn")}
+            </button>
+            <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>{t("heroPrimarySupport")}</div>
+          </div>
+          <button onClick={() => go("productos")}
+            style={{ width: "100%", background: "#fff", color: "#1A1A1A", border: "2px solid #1A1A1A", padding: "14px 24px", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans', sans-serif" }}>
+            {t("heroSecondaryBtn")}
+          </button>
           <a href="https://wa.me/17073607420?text=Hola%20Jose%2C%20me%20interesa%20información%20de%20dulces%20Pigui" target="_blank" rel="noopener noreferrer"
-            style={{ background: "#25D366", color: "#fff", border: "none", padding: "14px 28px", borderRadius: 8, fontSize: 16, fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>{t("btnWA")}</a>
+            style={{ fontSize: 13, color: "#444", fontWeight: 600, textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: 6 }}>
+            💬 {t("heroTrustLink")}
+          </a>
+        </div>
+
+        {/* What happens next */}
+        <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 22, fontSize: 12, color: "#555" }}>
+          {[t("howStep1"), t("howStep2"), t("howStep3")].map((step, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 18, height: 18, borderRadius: "50%", border: "1.5px solid #D4951A", color: "#D4951A", fontSize: 10, fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+              {step}
+            </div>
+          ))}
         </div>
 
         {/* Trust badges */}
-        <div style={{ display: "flex", gap: 16, marginTop: 28, flexWrap: "wrap", fontSize: 12, color: "#888" }}>
+        <div style={{ display: "flex", gap: 16, marginTop: 22, flexWrap: "wrap", fontSize: 12, color: "#888" }}>
           <span>{t("badge1")}</span>
           <span>{t("badge2")}</span>
           <span>{t("badge3")}</span>
@@ -1061,7 +1099,7 @@ export default function App() {
                 />
                 <button onClick={lookupCustomer} disabled={lookupLoading}
                   style={{ width: "100%", padding: "14px 20px", background: lookupLoading ? "#999" : "#C41E2A", color: "#fff", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: lookupLoading ? "default" : "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-                  {lookupLoading ? "Buscando..." : "Buscar mis pedidos"}
+                  {lookupLoading ? t("lookupSearching") : t("lookupBtn")}
                 </button>
               </>
             )}
@@ -1071,7 +1109,7 @@ export default function App() {
                 <p style={{ fontSize: 14, color: "#E65100", margin: 0 }}>{lookupResults.error}</p>
                 <button onClick={() => setLookupResults(null)}
                   style={{ marginTop: 12, padding: "8px 16px", background: "none", border: "1px solid #E65100", color: "#E65100", borderRadius: 6, fontSize: 13, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-                  Intentar de nuevo
+                  {t("lookupTryAgain")}
                 </button>
               </div>
             )}
@@ -1079,8 +1117,8 @@ export default function App() {
             {lookupResults?.orders && (
               <>
                 <div style={{ padding: "12px 16px", background: "#FFF8E1", borderRadius: 8, marginBottom: 16, fontSize: 13, color: "#8B6914", fontWeight: 600 }}>
-                  ✓ Encontramos {lookupResults.orders.length} pedido{lookupResults.orders.length > 1 ? "s" : ""}
-                  {lookupResults.orders[0]?.cliente?.negocio ? ` de ${lookupResults.orders[0].cliente.negocio}` : ""}
+                  ✓ {t("lookupFound")} {lookupResults.orders.length} {lookupResults.orders.length > 1 ? t("lookupOrders") : t("lookupOrder")}
+                  {lookupResults.orders[0]?.cliente?.negocio ? `${t("lookupFrom")}${lookupResults.orders[0].cliente.negocio}` : ""}
                 </div>
                 {lookupResults.orders.map((order, idx) => {
                   const orderItems = Object.entries(order.cart || {}).filter(([, q]) => q > 0);
@@ -1106,14 +1144,15 @@ export default function App() {
                       </div>
                       <button onClick={() => reorderFromHistory(order)}
                         style={{ width: "100%", padding: "10px 16px", background: isLatest ? "#C41E2A" : "#1A1A1A", color: "#fff", border: "none", borderRadius: 6, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-                        🔄 Ordenar igual
+                        {t("lookupReorder")}
                       </button>
+                      <p style={{ fontSize: 11, color: "#999", textAlign: "center", margin: "6px 0 0" }}>{t("lookupReorderNote")}</p>
                     </div>
                   );
                 })}
                 <button onClick={() => { setLookupResults(null); setLookupPhone(""); }}
                   style={{ width: "100%", padding: "10px", background: "none", border: "1px solid #ddd", borderRadius: 6, fontSize: 13, color: "#888", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", marginTop: 8 }}>
-                  Buscar otro número
+                  {t("lookupOtherNum")}
                 </button>
               </>
             )}
