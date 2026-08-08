@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { SUPABASE_URL, SUPABASE_KEY } from "./config.js";
 import { supabase, ensureSession } from "./supabaseClient.js";
-const APP_VERSION = "1.2.0";
+const APP_VERSION = "1.2.1";
 const SUPA_URL = SUPABASE_URL !== "YOUR_PROJECT_URL_HERE" ? SUPABASE_URL : null;
 const SUPA_KEY = SUPABASE_KEY !== "YOUR_ANON_KEY_HERE" ? SUPABASE_KEY : null;
 const SUPA_HEADERS = { "Content-Type": "application/json", "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}`, "Prefer": "return=representation,resolution=merge-duplicates" };
@@ -116,6 +116,7 @@ const TX = {
     footerSub: "Distribuidor Autorizado Dulces Pigüi • Ukiah, California • © 2026",
     langSwitch: "English",
     caja: "caja", cajas: "cajas",
+    product: "producto", products: "productos", more: "más",
     perCase: "/caja",
     tierLabels: ["1-4 cajas","5-9 cajas","10-19 cajas","20+ cajas"],
     subSlaps: "Paletas de caramelo macizo con chile — 7 sabores",
@@ -224,6 +225,7 @@ const TX = {
     footerSub: "Authorized Distributor Dulces Pigüi • Ukiah, California • © 2026",
     langSwitch: "Español",
     caja: "case", cajas: "cases",
+    product: "product", products: "products", more: "more",
     perCase: "/case",
     tierLabels: ["1-4 cases","5-9 cases","10-19 cases","20+ cases"],
     subSlaps: "Hard candy lollipops with chili — 7 flavors",
@@ -981,7 +983,7 @@ export default function App() {
             <div style={{ maxWidth: 800, margin: "0 auto", padding: "16px 20px 0" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                 <span style={{ fontSize: 14, fontWeight: 700, color: "#D4951A" }}>{t("cartYourOrder")} ({items.reduce((s,[,q])=>s+q,0)} {items.reduce((s,[,q])=>s+q,0) > 1 ? t("cajas") : t("caja")})</span>
-                <button onClick={() => go("catalogo")} style={{ fontSize: 12, color: "#D4951A", background: "none", border: "1px solid #D4951A", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("cartEdit")}</button>
+                <button onClick={() => go("productos")} style={{ fontSize: 12, color: "#D4951A", background: "none", border: "1px solid #D4951A", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{t("cartEdit")}</button>
               </div>
               {items.map(([key, q]) => { const pi = getPI(key); const cp = getCasePrice(pi); return (
                 <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
@@ -1136,11 +1138,11 @@ export default function App() {
                           const label = getLabel(key);
                           return (
                             <div key={key} style={{ fontSize: 13, color: "#666", marginBottom: 2 }}>
-                              • {q} caja{q > 1 ? "s" : ""} {label}
+                              • {q} {t(q > 1 ? "cajas" : "caja")} {label}
                             </div>
                           );
                         })}
-                        {orderItems.length > 4 && <div style={{ fontSize: 12, color: "#999", fontStyle: "italic" }}>+ {orderItems.length - 4} producto{orderItems.length - 4 > 1 ? "s" : ""} más</div>}
+                        {orderItems.length > 4 && <div style={{ fontSize: 12, color: "#999", fontStyle: "italic" }}>+ {orderItems.length - 4} {t(orderItems.length - 4 > 1 ? "products" : "product")} {t("more")}</div>}
                       </div>
                       <button onClick={() => reorderFromHistory(order)}
                         style={{ width: "100%", padding: "10px 16px", background: isLatest ? "#C41E2A" : "#1A1A1A", color: "#fff", border: "none", borderRadius: 6, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
